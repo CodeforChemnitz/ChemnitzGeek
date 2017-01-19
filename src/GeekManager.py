@@ -44,9 +44,19 @@ class GeekManager:
             # print(str(len(ratings)) +"ratings but" +str(len(ids)) + "ids")
         # return ratings
   
-    def WriteCSVFile(self, fPath):
+    def WriteJSONFile(self, fPath):
+        fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating"]
         fOut = open(fPath, 'w')
+        fOut.write("[\n{")
+        fOut.write("},\n{".join([", ".join(["\""+field+"\": \"" + str(game[field]) + "\"" for field in fields]) for game in self.gameList]))
+        fOut.write("}\n]")
 
+    def WriteCSVFile(self, fPath):
+        fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating"]
+        fOut = open(fPath, 'w')
+        fOut.write(",".join(fields) + "\n")
+        for game in self.gameList:
+            fOut.write(",".join([game[x] for x in fields]) + "\n")
 
     def PrintIDs(self):
         print(str(len(self.idList)) + " IDs:\n" + str(self.idList))

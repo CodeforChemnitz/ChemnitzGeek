@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>ChemnitzGeek</title>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+      $.getJSON("gameData.json", function(json) {
+        console.log(json);
+      });
+    </script>
+  </head>
+  <body>
+    <!--<form id="searchForm">-->
+      <!--# Players:-->
+      <!--<input type="number" id="inputNumPlayers" name="numPlayers" value="0" min="0" max="99"/>-->
+      <!--<br/>-->
+    <!--</form>-->
+    <div id="searchResults">
+      <table id="gameTable"/>
+    </div>
+  </body>
+</html>
