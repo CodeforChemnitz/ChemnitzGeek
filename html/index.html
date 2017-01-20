@@ -6,19 +6,49 @@
     <link rel="stylesheet" href="style.css"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script>
-      $.getJSON("gameData.json", function(json) {
-        console.log(json);
-      });
+      function matchesQuery(game) {
+        var numPlayers = parseInt(document.forms["searchForm"]["inputNumPlayers"].value);
+
+        var ratingMin = parseFloat(document.forms["searchForm"]["inputRatingMin"].value);
+        var ratingMax = parseFloat(document.forms["searchForm"]["inputRatingMax"].value);
+        if (numPlayers > 0 && (numPlayers < parseInt(game.minPlayers) || numPlayers > parseInt(game.maxPlayers)))  return false;
+        if (parseFloat(game.rating) < ratingMin || parseFloat(game.rating) > ratingMax)  return false;
+        return true;
+      }
+      function reloadGames() {
+        $.getJSON("gameData.json", function(json) {
+          document.getElementById("gameTableBody").innerHTML = "";
+          for (var i = 0; i < json.length; i++) {
+            var game = json[i];
+            if (!matchesQuery(game))  continue;
+
+            var rowHTML = "";
+            rowHTML += "<tr>";
+            rowHTML += "<td>" + game.name + "</td>";
+            rowHTML += "<td>" + game.rating + "</td>";
+            rowHTML += "<td>" + game.minPlayers + "</td>";
+            rowHTML += "<td>" + game.maxPlayers + "</td>";
+            rowHTML += "</tr>";
+            document.getElementById("gameTableBody").innerHTML += rowHTML;
+          }
+        });
+      }
     </script>
   </head>
   <body>
-    <!--<form id="searchForm">-->
-      <!--# Players:-->
-      <!--<input type="number" id="inputNumPlayers" name="numPlayers" value="0" min="0" max="99"/>-->
-      <!--<br/>-->
-    <!--</form>-->
+    <form id="searchForm">
+      # Players:
+      <input type="number" id="inputNumPlayers" name="numPlayers" value="0" min="0" max="99"/>
+      Rating:
+      <input type="text" id="inputRatingMin" name="inputRatingMin" value="0"/>
+      <input type="text" id="inputRatingMax" name="inputRatingMax" value="10"/>
+      <input type="button" value="Refresh" onclick="reloadGames();"/>
+      <br/>
+    </form>
     <div id="searchResults">
-      <table id="gameTable"/>
+      <table id="gameTable">
+        <tbody id="gameTableBody"/>
+      </table>
     </div>
   </body>
 </html>
