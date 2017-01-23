@@ -6,6 +6,20 @@
     <link rel="stylesheet" href="style.css"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script>
+      class gameCollection {
+        constructor(name, url) {
+          this.name = name;
+          this.url = url;
+        }
+      }
+
+      var collections = [
+        new gameCollection("Spielenacht 2016", "gameData.json"),
+        new gameCollection("Spielenacht 2017", "gameData.json"),
+        new gameCollection("Stadtbibliothek", "gameData.json"),
+        new gameCollection("Studentenwerk", "gameData.json"),
+      ];
+
       function matchesQuery(game) {
         var numPlayers = parseInt(document.forms["searchForm"]["inputNumPlayers"].value);
 
@@ -16,7 +30,7 @@
         return true;
       }
       function reloadGames() {
-        $.getJSON("gameData.json", function(json) {
+        $.getJSON(collections[0].url, function(json) {
           document.getElementById("gameTableBody").innerHTML = "";
           for (var i = 0; i < json.length; i++) {
             var game = json[i];
@@ -26,8 +40,7 @@
             rowHTML += "<tr>";
             rowHTML += "<td>" + game.name + "</td>";
             rowHTML += "<td>" + game.rating + "</td>";
-            rowHTML += "<td>" + game.minPlayers + "</td>";
-            rowHTML += "<td>" + game.maxPlayers + "</td>";
+            rowHTML += "<td>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
             rowHTML += "</tr>";
             document.getElementById("gameTableBody").innerHTML += rowHTML;
           }
@@ -36,17 +49,40 @@
     </script>
   </head>
   <body>
-    <form id="searchForm">
-      # Players:
-      <input type="number" id="inputNumPlayers" name="numPlayers" value="0" min="0" max="99"/>
-      Rating:
-      <input type="text" id="inputRatingMin" name="inputRatingMin" value="0"/>
-      <input type="text" id="inputRatingMax" name="inputRatingMax" value="10"/>
-      <input type="button" value="Refresh" onclick="reloadGames();"/>
-      <br/>
-    </form>
+    <div id="side">
+      <form id="searchForm" class="sideForm">
+        # Players:
+        <input type="number" id="inputNumPlayers" name="numPlayers" value="0" min="0" max="99"/>
+        <br/>
+        Rating:
+        <input type="text" id="inputRatingMin" name="inputRatingMin" value="0"/>
+        <input type="text" id="inputRatingMax" name="inputRatingMax" value="10"/>
+        <br/>
+        Weight:
+        <input type="text" id="inputWeightMin" name="inputWeightMin" value="1"/>
+        <input type="text" id="inputWeightMax" name="inputWeightMax" value="5"/>
+        <br/>
+        <input type="button" value="Refresh" onclick="reloadGames();"/>
+      </form>
+      <form id="collectionsForm" class="sideForm">
+        <script>
+          collectionBoxes = "";
+          for (i = 0; i < collections.length; i++) {
+            collectionBoxes += "<input type=\"checkbox\" name=\"" + collections[i].name + "\" value=\"" + collections[i].name + "\"/> " + collections[i].name + "<br/>";
+          }
+          document.getElementById("collectionsForm").innerHTML = collectionBoxes;
+        </script>
+      </form>
+    </div>
     <div id="searchResults">
       <table id="gameTable">
+        <thead id="gameTableHead">
+          <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Players</th>
+          </tr>
+        </thead>
         <tbody id="gameTableBody"/>
       </table>
     </div>

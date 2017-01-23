@@ -1,4 +1,45 @@
-#gameTable td{
+#gameTable {
+  border-collapse: collapse;
+}
+
+#gameTable tr{
+  border-bottom: 1px solid black;
+}
+
+#gameTable th {
+  background-color: #CB3A00;
+  color: white;
+}
+
+#gameTable th {
+  padding: 5px 9px;
+}
+
+#gameTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#gameTable tr:hover {
+  background-color: #F8D9CC;
+}
+
+#side {
+  display: inline-block;
+  float: left;
+  margin: 5px;
+  padding: 0px;
+}
+
+#side input[type=text] {
+  width: 20pt;
+}
+
+#side input[type=number] {
+  width: 30pt;
+}
+
+.sideForm {
   border: 1px solid black;
-  margin: 0px;
+  margin: 5px;
+  padding: 5px;
 }
