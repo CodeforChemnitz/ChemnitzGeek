@@ -16,7 +16,7 @@
 }
 
 #gameTable tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #f6f6f6;
 }
 
 #gameTable tr:hover {
@@ -31,15 +31,39 @@
 }
 
 #side input[type=text] {
-  width: 20pt;
+  width: 25pt;
 }
 
 #side input[type=number] {
   width: 30pt;
 }
 
+#inputSubmit {
+  margin-top: 10px;
+}
+
 .sideForm {
   border: 1px solid black;
   margin: 5px;
   padding: 5px;
+}
+
+.noUi-horizontal {
+  height: 8px;
+}
+.noUi-horizontal .noUi-handle {
+  width: 17px;
+  height: 15px;
+  left: -8px;
+  top: -4px;
+}
+.noUi-handle:before,
+.noUi-handle:after {
+  content: none;
+}
+
+#soft {
+  display: inline-block;
+  width: 100px;
+  margin: 0px 5px;
 }

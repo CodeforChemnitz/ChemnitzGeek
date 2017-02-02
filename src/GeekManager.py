@@ -36,6 +36,7 @@ class GeekManager:
                 game['minPlayers'] = item.find('minplayers').attrib['value']
                 game['maxPlayers'] = item.find('maxplayers').attrib['value']
                 game['rating'] = item.find('statistics').find('ratings').find('average').attrib['value']
+                game['weight'] = item.find('statistics').find('ratings').find('averageweight').attrib['value']
                 self.gameList.append(game)
         except:
             print("Error: " + str(sys.exc_info()[0]))
@@ -45,14 +46,14 @@ class GeekManager:
         # return ratings
   
     def WriteJSONFile(self, fPath):
-        fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating"]
+        fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
         fOut = open(fPath, 'w')
         fOut.write("[\n{")
         fOut.write("},\n{".join([", ".join(["\""+field+"\": \"" + str(game[field]) + "\"" for field in fields]) for game in self.gameList]))
         fOut.write("}\n]")
 
     def WriteCSVFile(self, fPath):
-        fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating"]
+        fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
         fOut = open(fPath, 'w')
         fOut.write(",".join(fields) + "\n")
         for game in self.gameList:
