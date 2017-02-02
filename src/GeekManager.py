@@ -6,13 +6,19 @@ from xml.etree import ElementTree as ET
 
 class GeekManager:
     nameList = []  # May contain duplicates
+    bggNameList = []  # As many items as idList
     idList = []    # Unique IDs
     gameList = []  # Unique games with details
+
+    def PreprocessName(self, name):
+        name = name.strip()
+        name = name.replace("\"", "")
+        return name
 
     def ReadNamesFromRawFile(self, fPath):
         fIn = open(fPath, 'r')
         for line in fIn:
-            name = line.strip()
+            name = self.PreprocessName(line)
             self.nameList.append(name)
         print(str(len(self.nameList)) + " names in list")
 
@@ -23,6 +29,34 @@ class GeekManager:
             if not i in self.idList:
                 self.idList.append(i)
         print(str(len(self.idList)) + " ids in list")
+
+    def LoadIDsFromNames(self):
+        for i in range(len(self.idList), len(self.nameList)):
+            gameName = self.nameList[i]
+            (gameId, bggGameName) = self.LoadBGGIDFromName(gameName)
+            self.bggNameList.append(bggGameName)
+            self.idList.append(gameId)
+        print("Now " + str(len(self.nameList)) + " names and " + str(len(self.idList)) + " ids are loaded")
+            
+    def LoadBGGIDFromName(self, name):
+        # credit to http://stackoverflow.com/questions/4451600/python-newbie-parse-xml-from-api-call
+        url = "https://boardgamegeek.com/xmlapi2/search?query=" + urllib.parse.quote(name)
+        response = urllib.request.urlopen(url)
+        gameId = "-1"
+        gameName = "UNKNOWN"
+        try:
+            root = ET.parse(response).getroot()
+            item = root.find('item')
+            gameId = item.attrib['id']
+            gameName = item.find('name').attrib['value']
+            #print item.find('name').text + " [" + str(item['id']) + "]"
+        except:
+            print("Error:" + str(sys.exc_info()[0]))
+        print("... IN  " + name)
+        print("... RES " + gameName)
+        print("... ID  " + gameId)
+        print("\n")
+        return gameId, gameName
 
     def RequestDetailsBatch(self, batchSize):
         for b in self.Batch(self.idList, batchSize):
@@ -53,6 +87,13 @@ class GeekManager:
             # print(str(len(ratings)) +"ratings but" +str(len(ids)) + "ids")
         # return ratings
   
+    def WriteNamesIDCSVFile(self, fPath):
+        fOut = open(fPath, 'w')
+        fOut.write("\"name\", \"bggName\", \"id\"\n")
+        for i in range(len(self.idList)):
+            # fOut.write(",".join([game[x] for x in fields]) + "\n")
+            fOut.write("\"{}\", \"{}\", \"{}\"\n".format(self.nameList[i], self.bggNameList[i], self.idList[i]))
+
     def WriteJSONFile(self, fPath):
         fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
         fOut = open(fPath, 'w')
