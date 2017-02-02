@@ -12,17 +12,19 @@
 
     <script>
       class gameCollection {
-        constructor(name, url) {
+        constructor(name, camelName, url) {
           this.name = name;
+          this.camelName = camelName;
           this.url = url;
+          this.games = null;
         }
       }
 
       var collections = [
-        new gameCollection("Spielenacht 2016", "gameData.json"),
-        new gameCollection("Spielenacht 2017", "gameData.json"),
-        new gameCollection("Stadtbibliothek", "gameData.json"),
-        new gameCollection("Studentenwerk", "gameData.json"),
+        new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json"),
+        new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json"),
+        new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json"),
+        new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json"),
       ];
 
       function matchesQuery(game) {
@@ -37,11 +39,26 @@
         if (parseFloat(game.weight) < weightMin || parseFloat(game.weight) > weightMax)  return false;
         return true;
       }
+
       function reloadGames() {
-        $.getJSON(collections[0].url, function(json) {
+        for (i = 0; i < collections.length; i++) {
+          if (! document.getElementById("check"+collections[i].camelName).checked) {
+            continue;
+          }
+
+          console.log(collections[i].name);
+          if (collections[i].games == null) {
+            $.getJSON(collections[i].url, function(json) {
+              collections[i].games = "asdf";//jQuery.extend(true, {}, json);
+              console.log(collections[i].games);
+            });
+          }
+          console.log(collections[i].games);
+          //TODO: games is not defined in this scope! wtf
           document.getElementById("gameTableBody").innerHTML = "";
-          for (var i = 0; i < json.length; i++) {
-            var game = json[i];
+          games = collections[i].games;
+          for (var j = 0; j < games.length; j++) {
+            var game = games[j];
             if (!matchesQuery(game))  continue;
 
             var rowHTML = "";
@@ -55,7 +72,7 @@
             rowHTML += "</tr>";
             document.getElementById("gameTableBody").innerHTML += rowHTML;
           }
-        });
+        }
       }
     </script>
   </head>
@@ -89,7 +106,7 @@
         <script>
           collectionBoxes = "";
           for (i = 0; i < collections.length; i++) {
-            collectionBoxes += "<input type=\"checkbox\" name=\"" + collections[i].name + "\" value=\"" + collections[i].name + "\"/> " + collections[i].name + "<br/>";
+            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\"" + (i==0 ? " checked" : "") + "/> " + collections[i].name + "<br/>";
           }
           document.getElementById("collectionsForm").innerHTML = collectionBoxes;
         </script>
