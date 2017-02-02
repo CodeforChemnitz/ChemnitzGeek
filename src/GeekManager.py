@@ -5,10 +5,18 @@ from xml.etree import ElementTree as ET
 
 
 class GeekManager:
-    idList = []
-    gameList = []
+    nameList = []  # May contain duplicates
+    idList = []    # Unique IDs
+    gameList = []  # Unique games with details
 
-    def LoadIDsFromRawFile(self, fPath):
+    def ReadNamesFromRawFile(self, fPath):
+        fIn = open(fPath, 'r')
+        for line in fIn:
+            name = line.strip()
+            self.nameList.append(name)
+        print(str(len(self.nameList)) + " names in list")
+
+    def ReadIDsFromRawFile(self, fPath):
         fIn = open(fPath, 'r')
         for line in fIn:
             i = line.strip()
