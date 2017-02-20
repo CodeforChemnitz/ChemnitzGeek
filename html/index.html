@@ -21,10 +21,11 @@
       }
 
       var collections = [
-        new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json"),
+        new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.json"),
         new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json"),
         new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json"),
         new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json"),
+        new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json"),
       ];
 
       function matchesQuery(game) {
@@ -48,7 +49,9 @@
 
           console.log(collections[i].name);
           if (collections[i].games == null) {
+            console.log("its null, requesting " + collections[i].url);
             $.getJSON(collections[i].url, function(json) {
+              console.log("not for long");
               collections[i].games = "asdf";//jQuery.extend(true, {}, json);
               console.log(collections[i].games);
             });
@@ -106,7 +109,7 @@
         <script>
           collectionBoxes = "";
           for (i = 0; i < collections.length; i++) {
-            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\"" + (i==0 ? " checked" : "") + "/> " + collections[i].name + "<br/>";
+            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\"" + (i==4 ? " checked" : "") + "/> " + collections[i].name + "<br/>";
           }
           document.getElementById("collectionsForm").innerHTML = collectionBoxes;
         </script>

@@ -1,4 +1,5 @@
 # from Game import *
+import csv
 import sys
 import urllib.request
 from xml.etree import ElementTree as ET
@@ -15,20 +16,8 @@ class GeekManager:
         name = name.replace("\"", "")
         return name
 
-    def ReadNamesFromRawFile(self, fPath):
-        fIn = open(fPath, 'r')
-        for line in fIn:
-            name = self.PreprocessName(line)
-            self.nameList.append(name)
-        print(str(len(self.nameList)) + " names in list")
-
-    def ReadIDsFromRawFile(self, fPath):
-        fIn = open(fPath, 'r')
-        for line in fIn:
-            i = line.strip()
-            if not i in self.idList:
-                self.idList.append(i)
-        print(str(len(self.idList)) + " ids in list")
+    # BORDGAMEGEEK
+    # ------------
 
     def LoadIDsFromNames(self):
         for i in range(len(self.idList), len(self.nameList)):
@@ -86,13 +75,44 @@ class GeekManager:
         # if not len(ratings) == len(ids):
             # print(str(len(ratings)) +"ratings but" +str(len(ids)) + "ids")
         # return ratings
-  
-    def WriteNamesIDCSVFile(self, fPath):
+
+    # FILE INPUT
+    # ----------
+
+    def ReadNamesFromRawFile(self, fPath):
+        fIn = open(fPath, 'r')
+        for line in fIn:
+            name = self.PreprocessName(line)
+            self.nameList.append(name)
+        print(str(len(self.nameList)) + " names in list")
+
+    def ReadIDsFromRawFile(self, fPath):
+        fIn = open(fPath, 'r')
+        for line in fIn:
+            i = line.strip()
+            if not i in self.idList:
+                self.idList.append(i)
+        print(str(len(self.idList)) + " ids in list")
+
+    def ReadNamesIDsCSVFile(self, fPath):
+        csvFile = open(fPath, 'r')
+        csvReader = csv.DictReader(csvFile, delimiter=',', quotechar='\"')
+        for row in csvReader:
+            self.nameList.append(row['name'])
+            self.bggNameList.append(row['bggName'])
+            self.idList.append(row['id'])
+
+
+
+    # FILE OUTPUT
+    # -----------
+
+    def WriteNamesIDsCSVFile(self, fPath):
         fOut = open(fPath, 'w')
-        fOut.write("\"name\", \"bggName\", \"id\"\n")
+        fOut.write("\"name\",\"bggName\",\"id\"\n")
         for i in range(len(self.idList)):
             # fOut.write(",".join([game[x] for x in fields]) + "\n")
-            fOut.write("\"{}\", \"{}\", \"{}\"\n".format(self.nameList[i], self.bggNameList[i], self.idList[i]))
+            fOut.write("\"{}\",\"{}\",\"{}\"\n".format(self.nameList[i], self.bggNameList[i], self.idList[i]))
 
     def WriteJSONFile(self, fPath):
         fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
