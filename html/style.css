@@ -71,3 +71,11 @@
 #footnote {
   display: none;
 }
+
+.collsname {
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #7e7;
+  font-size: 60%;
+  padding: 3px;
+}

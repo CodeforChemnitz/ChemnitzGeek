@@ -9,8 +9,8 @@ class gameCollection {
 }
 
 var collections = [
-	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "SN16"),
-	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "SN17"),
+	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "S16"),
+	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "S17"),
 	new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json", "Biblo"),
 	new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json", "StuWe"),
 	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz"),
@@ -110,7 +110,12 @@ function fillTable() {
     rowHTML += "<td>" + game.minAge + "+</td>";
     rowHTML += "<td>" + game.weight + "</td>";
     rowHTML += "<td>" + game.yearPublished + "</td>";
-    rowHTML += "<td>" + game.collSName + "</td>";
+    rowHTML += "<td>";
+    var splitStr = game.collSName.split();
+    for (var j = 0; j < splitStr.length; j++) {
+      rowHTML += "<span class='collsname'>" + splitStr[j] + "</span>";
+    }
+    rowHTML += "</td>";
     rowHTML += "</tr>";
     document.getElementById("gameTableBody").innerHTML += rowHTML;
   }
