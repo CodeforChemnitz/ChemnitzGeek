@@ -67,3 +67,7 @@
   width: 100px;
   margin: 0px 5px;
 }
+
+#footnote {
+  display: none;
+}
