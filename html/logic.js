@@ -8,12 +8,14 @@ class gameCollection {
 }
 
 var collections = [
-	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.json"),
+	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json"),
 	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json"),
 	new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json"),
 	new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json"),
 	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json"),
 ];
+
+var loadedCollections = [];
 
 function matchesQuery(game) {
 	var numPlayers = parseInt(document.forms["searchForm"]["inputNumPlayers"].value);
@@ -28,39 +30,61 @@ function matchesQuery(game) {
 	return true;
 }
 
+function loadSingleCollectionGames(collectionIndices) {
+  var currIdx = collectionIndices[0];
+  console.log("load " + collections[currIdx].url);
+  $.getJSON(collections[currIdx].url, function(json) {
+    console.log(currIdx);
+    if (collections[currIdx].games == null)  //TODO: move this to more appropriate place
+      collections[currIdx].games = jQuery.extend(true, {}, json);
+  }).then(function(){
+    loadedCollections.push(collections[currIdx]);
+    collectionIndices.splice(0, 1);
+    if (collectionIndices.length > 0) {
+      console.log("request " + collectionIndices);
+      loadSingleCollectionGames(collectionIndices);
+    }
+    else {
+      reloadGamesFinished();
+    }
+  });
+}
 function reloadGames() {
+  loadedCollections = [];
+	var collectionIndices = [];
 	for (i = 0; i < collections.length; i++) {
-		if (! document.getElementById("check"+collections[i].camelName).checked) {
-			continue;
-		}
-
-		console.log(collections[i].name);
-		if (collections[i].games == null) {
-			console.log("its null, requesting " + collections[i].url);
-			$.getJSON(collections[i].url, function(json) {
-				console.log("not for long");
-				collections[i].games = "asdf";//jQuery.extend(true, {}, json);
-				console.log(collections[i].games);
-			});
-		}
-		console.log(collections[i].games);
-		//TODO: games is not defined in this scope! wtf
-		document.getElementById("gameTableBody").innerHTML = "";
-		games = collections[i].games;
-		for (var j = 0; j < games.length; j++) {
-			var game = games[j];
-			if (!matchesQuery(game))  continue;
-
-			var rowHTML = "";
-			rowHTML += "<tr>";
-			rowHTML += "<td>" + game.name + "</td>";
-			rowHTML += "<td>" + game.rating + "</td>";
-			rowHTML += "<td>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
-			rowHTML += "<td>" + game.minAge + "+</td>";
-			rowHTML += "<td>" + game.weight + "</td>";
-			rowHTML += "<td>" + game.yearPublished + "</td>";
-			rowHTML += "</tr>";
-			document.getElementById("gameTableBody").innerHTML += rowHTML;
+		if (document.getElementById("check"+collections[i].camelName).checked) {
+			collectionIndices.push(i);
 		}
 	}
+  console.log(collectionIndices);
+  loadSingleCollectionGames(collectionIndices);
+
+  
+	//for (i = 0; i < collections.length; i++) {
+		//TODO: games is not defined in this scope! wtf
+		//document.getElementById("gameTableBody").innerHTML = "";
+		//games = collections[i].games;
+		//for (var j = 0; j < games.length; j++) {
+			//var game = games[j];
+			//if (!matchesQuery(game))  continue;
+
+			//var rowHTML = "";
+			//rowHTML += "<tr>";
+			//rowHTML += "<td>" + game.name + "</td>";
+			//rowHTML += "<td>" + game.rating + "</td>";
+			//rowHTML += "<td>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
+			//rowHTML += "<td>" + game.minAge + "+</td>";
+			//rowHTML += "<td>" + game.weight + "</td>";
+			//rowHTML += "<td>" + game.yearPublished + "</td>";
+			//rowHTML += "</tr>";
+			//document.getElementById("gameTableBody").innerHTML += rowHTML;
+		//}
+	//}
+}
+
+function reloadGamesFinished() {
+  for (i = 0; i < loadedCollections.length; i++) {
+    console.log(loadedCollections[i].games);
+  }
 }
