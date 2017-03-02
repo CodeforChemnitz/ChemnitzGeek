@@ -1,18 +1,19 @@
 class gameCollection {
-	constructor(name, camelName, url) {
+	constructor(name, camelName, url, shortName) {
 		this.name = name;
 		this.camelName = camelName;
 		this.url = url;
 		this.games = null;
+		this.shortName = shortName;
 	}
 }
 
 var collections = [
-	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json"),
-	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json"),
-	new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json"),
-	new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json"),
-	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json"),
+	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "SN16"),
+	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "SN17"),
+	new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json", "Biblo"),
+	new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json", "StuWe"),
+	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz"),
 ];
 
 var loadedCollections = [];
@@ -60,28 +61,6 @@ function reloadGames() {
 	}
   console.log(collectionIndices);
   loadSingleCollectionGames(collectionIndices);
-
-  
-	//for (i = 0; i < collections.length; i++) {
-		//TODO: games is not defined in this scope! wtf
-		//document.getElementById("gameTableBody").innerHTML = "";
-		//games = collections[i].games;
-		//for (var j = 0; j < games.length; j++) {
-			//var game = games[j];
-			//if (!matchesQuery(game))  continue;
-
-			//var rowHTML = "";
-			//rowHTML += "<tr>";
-			//rowHTML += "<td>" + game.name + "</td>";
-			//rowHTML += "<td>" + game.rating + "</td>";
-			//rowHTML += "<td>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
-			//rowHTML += "<td>" + game.minAge + "+</td>";
-			//rowHTML += "<td>" + game.weight + "</td>";
-			//rowHTML += "<td>" + game.yearPublished + "</td>";
-			//rowHTML += "</tr>";
-			//document.getElementById("gameTableBody").innerHTML += rowHTML;
-		//}
-	//}
 }
 
 function reloadGamesFinished() {
@@ -96,7 +75,7 @@ function reloadGamesFinished() {
       var game = games[j];
       if (!matchesQuery(game))  continue;
       
-      addGameToLoadedGames(game);
+      addGameToLoadedGames(game, loadedCollections[i].shortName);
     }
   }
 
@@ -104,16 +83,18 @@ function reloadGamesFinished() {
   fillTable();
 }
 
-function addGameToLoadedGames(game) {
+function addGameToLoadedGames(game, collSName) {
   var id = game.id;
   var idExists = false;
   for (var i = 0; i < loadedGames.length; i++) {
     if (loadedGames[i].bggID == id) {
+      loadedGames[i].collSName += "," + collSName;
       idExists = True;
       break;
     }
   }
   if (! idExists) {
+    game.collSName = collSName;
     loadedGames.push(game);
   }
 }
@@ -129,6 +110,7 @@ function fillTable() {
     rowHTML += "<td>" + game.minAge + "+</td>";
     rowHTML += "<td>" + game.weight + "</td>";
     rowHTML += "<td>" + game.yearPublished + "</td>";
+    rowHTML += "<td>" + game.collSName + "</td>";
     rowHTML += "</tr>";
     document.getElementById("gameTableBody").innerHTML += rowHTML;
   }
