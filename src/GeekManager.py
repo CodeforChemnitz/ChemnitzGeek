@@ -61,6 +61,7 @@ class GeekManager:
             root = ET.parse(response).getroot()
             for item in root.findall('item'):
                 game = {}
+                game['bggID'] = item.attrib["id"]
                 game['name'] = item.find("name[@type='primary']").attrib['value']
                 game['yearPublished'] = item.find('yearpublished').attrib['value']
                 game['minAge'] = item.find('minage').attrib['value']
@@ -115,14 +116,14 @@ class GeekManager:
             fOut.write("\"{}\",\"{}\",\"{}\"\n".format(self.nameList[i], self.bggNameList[i], self.idList[i]))
 
     def WriteJSONFile(self, fPath):
-        fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
+        fields = ["bggID", "name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
         fOut = open(fPath, 'w')
         fOut.write("[\n{")
         fOut.write("},\n{".join([", ".join(["\""+field+"\": \"" + str(game[field]) + "\"" for field in fields]) for game in self.gameList]))
         fOut.write("}\n]")
 
     def WriteCSVFile(self, fPath):
-        fields = ["name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
+        fields = ["bggID", "name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
         fOut = open(fPath, 'w')
         fOut.write(",".join(fields) + "\n")
         for game in self.gameList:

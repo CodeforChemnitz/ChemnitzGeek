@@ -16,6 +16,7 @@ var collections = [
 ];
 
 var loadedCollections = [];
+var loadedGames = [];
 
 function matchesQuery(game) {
 	var numPlayers = parseInt(document.forms["searchForm"]["inputNumPlayers"].value);
@@ -93,17 +94,32 @@ function reloadGamesFinished() {
     for (var j = 0; j < Object.keys(games).length; j++) {
       var game = games[j];
       if (!matchesQuery(game))  continue;
-
-      var rowHTML = "";
-      rowHTML += "<tr>";
-      rowHTML += "<td>" + game.name + "</td>";
-      rowHTML += "<td>" + game.rating + "</td>";
-      rowHTML += "<td>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
-      rowHTML += "<td>" + game.minAge + "+</td>";
-      rowHTML += "<td>" + game.weight + "</td>";
-      rowHTML += "<td>" + game.yearPublished + "</td>";
-      rowHTML += "</tr>";
-      document.getElementById("gameTableBody").innerHTML += rowHTML;
+      
+      addGameToLoadedGames(game);
     }
+  }
+
+  fillTable();
+}
+
+function addGameToLoadedGames(game) {
+  var id = game.id;
+  var idExists = false;
+  for (var i = 0; i < loadedGames.length; i++) {
+  }
+}
+
+function fillTable() {
+  for (var i = 0; i < loadedGames.length; i++) {
+    var rowHTML = "";
+    rowHTML += "<tr>";
+    rowHTML += "<td>" + game.name + "</td>";
+    rowHTML += "<td>" + game.rating + "</td>";
+    rowHTML += "<td>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
+    rowHTML += "<td>" + game.minAge + "+</td>";
+    rowHTML += "<td>" + game.weight + "</td>";
+    rowHTML += "<td>" + game.yearPublished + "</td>";
+    rowHTML += "</tr>";
+    document.getElementById("gameTableBody").innerHTML += rowHTML;
   }
 }
