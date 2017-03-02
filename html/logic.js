@@ -84,7 +84,26 @@ function reloadGames() {
 }
 
 function reloadGamesFinished() {
+  document.getElementById("gameTableBody").innerHTML = "";
+
   for (i = 0; i < loadedCollections.length; i++) {
-    console.log(loadedCollections[i].games);
+    var games = loadedCollections[i].games;
+    console.log(games);
+    console.log(Object.keys(games).length);
+    for (var j = 0; j < Object.keys(games).length; j++) {
+      var game = games[j];
+      if (!matchesQuery(game))  continue;
+
+      var rowHTML = "";
+      rowHTML += "<tr>";
+      rowHTML += "<td>" + game.name + "</td>";
+      rowHTML += "<td>" + game.rating + "</td>";
+      rowHTML += "<td>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
+      rowHTML += "<td>" + game.minAge + "+</td>";
+      rowHTML += "<td>" + game.weight + "</td>";
+      rowHTML += "<td>" + game.yearPublished + "</td>";
+      rowHTML += "</tr>";
+      document.getElementById("gameTableBody").innerHTML += rowHTML;
+    }
   }
 }
