@@ -72,10 +72,15 @@
   display: none;
 }
 
+.sourceCol {
+  text-align: center;
+  vertical-align: middle;
+}
+
 .collsname {
   border: 1px solid black;
   border-radius: 4px;
-  background-color: #7e7;
+  background-color: #bbe;
   font-size: 60%;
-  padding: 3px;
+  padding: 2px;
 }

@@ -110,7 +110,7 @@ function fillTable() {
     rowHTML += "<td>" + game.minAge + "+</td>";
     rowHTML += "<td>" + game.weight + "</td>";
     rowHTML += "<td>" + game.yearPublished + "</td>";
-    rowHTML += "<td>";
+    rowHTML += "<td class='sourceCol'>";
     var splitStr = game.collSName.split();
     for (var j = 0; j < splitStr.length; j++) {
       rowHTML += "<span class='collsname'>" + splitStr[j] + "</span>";
