@@ -86,6 +86,7 @@ function reloadGames() {
 
 function reloadGamesFinished() {
   document.getElementById("gameTableBody").innerHTML = "";
+  loadedGames = []
 
   for (i = 0; i < loadedCollections.length; i++) {
     var games = loadedCollections[i].games;
@@ -99,6 +100,7 @@ function reloadGamesFinished() {
     }
   }
 
+  console.log(loadedGames.length + " unique games loaded");
   fillTable();
 }
 
@@ -106,12 +108,20 @@ function addGameToLoadedGames(game) {
   var id = game.id;
   var idExists = false;
   for (var i = 0; i < loadedGames.length; i++) {
+    if (loadedGames[i].bggID == id) {
+      idExists = True;
+      break;
+    }
+  }
+  if (! idExists) {
+    loadedGames.push(game);
   }
 }
 
 function fillTable() {
   for (var i = 0; i < loadedGames.length; i++) {
     var rowHTML = "";
+    var game = loadedGames[i];
     rowHTML += "<tr>";
     rowHTML += "<td>" + game.name + "</td>";
     rowHTML += "<td>" + game.rating + "</td>";
