@@ -75,7 +75,7 @@ function reloadGamesFinished() {
       var game = games[j];
       if (!matchesQuery(game))  continue;
       
-      addGameToLoadedGames(game, loadedCollections[i].shortName);
+      addGameToLoadedGames(game, i);
     }
   }
 
@@ -83,18 +83,18 @@ function reloadGamesFinished() {
   fillTable();
 }
 
-function addGameToLoadedGames(game, collSName) {
-  var id = game.id;
+function addGameToLoadedGames(game, loadedCollIdx) {
+  var id = game.bggID;
   var idExists = false;
   for (var i = 0; i < loadedGames.length; i++) {
     if (loadedGames[i].bggID == id) {
-      loadedGames[i].collSName += "," + collSName;
-      idExists = True;
+      loadedGames[i].loadedColls.push(loadedCollIdx);
+      idExists = true;
       break;
     }
   }
   if (! idExists) {
-    game.collSName = collSName;
+    game.loadedColls = [loadedCollIdx];
     loadedGames.push(game);
   }
 }
@@ -111,9 +111,8 @@ function fillTable() {
     rowHTML += "<td>" + game.weight + "</td>";
     rowHTML += "<td>" + game.yearPublished + "</td>";
     rowHTML += "<td class='sourceCol'>";
-    var splitStr = game.collSName.split();
-    for (var j = 0; j < splitStr.length; j++) {
-      rowHTML += "<span class='collsname'>" + splitStr[j] + "</span>";
+    for (var j = 0; j < game.loadedColls.length; j++) {
+      rowHTML += "<span class='collsname'>" + loadedCollections[game.loadedColls[i]] + "</span>";
     }
     rowHTML += "</td>";
     rowHTML += "</tr>";

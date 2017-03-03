@@ -1,3 +1,6 @@
+h1 {
+  margin: 5px;
+}
 #gameTable {
   border-collapse: collapse;
 }
@@ -73,8 +76,6 @@
 }
 
 .sourceCol {
-  text-align: center;
-  vertical-align: middle;
 }
 
 .collsname {
@@ -83,4 +84,6 @@
   background-color: #bbe;
   font-size: 60%;
   padding: 2px;
+  margin: 0px 1px;
+  vertical-align: middle;
 }
