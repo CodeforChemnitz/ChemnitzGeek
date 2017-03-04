@@ -1,19 +1,20 @@
 class gameCollection {
-	constructor(name, camelName, url, shortName) {
+	constructor(name, camelName, url, shortName, color) {
 		this.name = name;
 		this.camelName = camelName;
 		this.url = url;
 		this.games = null;
 		this.shortName = shortName;
+    this.color = color;
 	}
 }
 
 var collections = [
-	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "S16"),
-	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "S17"),
-	new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json", "Biblo"),
-	new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json", "StuWe"),
-	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz"),
+	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "S16", "#bbf"),
+	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "S17", "#aaa"),
+	new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json", "Biblo", "#aaa"),
+	new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json", "StuWe", "#aaa"),
+	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#fbb"),
 ];
 
 var loadedCollections = [];
@@ -34,16 +35,13 @@ function matchesQuery(game) {
 
 function loadSingleCollectionGames(collectionIndices) {
   var currIdx = collectionIndices[0];
-  console.log("load " + collections[currIdx].url);
   $.getJSON(collections[currIdx].url, function(json) {
-    console.log(currIdx);
     if (collections[currIdx].games == null)  //TODO: move this to more appropriate place
       collections[currIdx].games = jQuery.extend(true, {}, json);
   }).then(function(){
     loadedCollections.push(collections[currIdx]);
     collectionIndices.splice(0, 1);
     if (collectionIndices.length > 0) {
-      console.log("request " + collectionIndices);
       loadSingleCollectionGames(collectionIndices);
     }
     else {
@@ -59,18 +57,14 @@ function reloadGames() {
 			collectionIndices.push(i);
 		}
 	}
-  console.log(collectionIndices);
   loadSingleCollectionGames(collectionIndices);
 }
 
 function reloadGamesFinished() {
-  document.getElementById("gameTableBody").innerHTML = "";
   loadedGames = []
 
   for (i = 0; i < loadedCollections.length; i++) {
     var games = loadedCollections[i].games;
-    console.log(games);
-    console.log(Object.keys(games).length);
     for (var j = 0; j < Object.keys(games).length; j++) {
       var game = games[j];
       if (!matchesQuery(game))  continue;
@@ -100,6 +94,7 @@ function addGameToLoadedGames(game, loadedCollIdx) {
 }
 
 function fillTable() {
+  document.getElementById("gameTableBody").innerHTML = "";
   for (var i = 0; i < loadedGames.length; i++) {
     var rowHTML = "";
     var game = loadedGames[i];
@@ -112,7 +107,8 @@ function fillTable() {
     rowHTML += "<td>" + game.yearPublished + "</td>";
     rowHTML += "<td class='sourceCol'>";
     for (var j = 0; j < game.loadedColls.length; j++) {
-      rowHTML += "<span class='collsname'>" + loadedCollections[game.loadedColls[i]] + "</span>";
+      collection = loadedCollections[game.loadedColls[j]];
+      rowHTML += "<span class='collsname' style='background-color: " + collection.color + ";'>" + collection.shortName + "</span>";
     }
     rowHTML += "</td>";
     rowHTML += "</tr>";
