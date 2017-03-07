@@ -108,7 +108,11 @@ function fillTable() {
     rowHTML += "<td class='sourceCol'>";
     for (var j = 0; j < game.loadedColls.length; j++) {
       collection = loadedCollections[game.loadedColls[j]];
-      rowHTML += "<span class='collsname' style='background-color: " + collection.color + ";'>" + collection.shortName + "</span>";
+      rowHTML += "<span class='collsname' style='background-color: " + collection.color + ";'>"
+        + "<a href='#'>"
+        + collection.shortName
+        + "</a>"
+        + "</span>";
     }
     rowHTML += "</td>";
     rowHTML += "</tr>";

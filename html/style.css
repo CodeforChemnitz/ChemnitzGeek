@@ -1,6 +1,3 @@
-h1 {
-  margin: 5px;
-}
 #gameTable {
   border-collapse: collapse;
 }
@@ -31,6 +28,12 @@ h1 {
   float: left;
   margin: 5px;
   padding: 0px;
+  border-right: 2px solid #ddd;
+}
+
+#side h1 {
+  margin: 5px;
+  font-size: 1.5em;
 }
 
 #side input[type=text] {
@@ -46,9 +49,16 @@ h1 {
 }
 
 .sideForm {
-  border: 1px solid black;
   margin: 5px;
   padding: 5px;
+}
+
+#searchForm {
+  border-bottom: 1px solid #eee;
+}
+
+#searchForm input {
+  margin: 4px;
 }
 
 .noUi-horizontal {
@@ -86,4 +96,7 @@ h1 {
   padding: 2px;
   margin: 0px 1px;
   vertical-align: middle;
+
+.collsname a:link{
+  text-decoration: none;
 }
