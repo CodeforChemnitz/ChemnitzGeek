@@ -2,13 +2,15 @@
   border-collapse: collapse;
 }
 
-#gameTable tr{
+#gameTableHead tr{
+  border-bottom: 2px solid black;
+  box-shadow: 0px 5px 5px grey;
+}
+#gameTableBody tr{
   border-bottom: 1px solid black;
 }
 
 #gameTable th {
-  background-color: #CB3A00;
-  color: white;
 }
 
 #gameTable th {
@@ -20,16 +22,17 @@
 }
 
 #gameTable tr:hover {
-  background-color: #F8D9CC;
+  background-color: #eef;
 }
 
 #side {
   display: inline-block;
   float: left;
   margin: 5px;
-  padding: 0px;
-  border-right: 2px solid #ddd;
-}
+  padding: 10px;
+  background-color: #555;
+  color: #eee;
+} 
 
 #side h1 {
   margin: 5px;
