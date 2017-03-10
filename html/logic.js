@@ -10,11 +10,11 @@ class gameCollection {
 }
 
 var collections = [
-	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "S16", "#bbf"),
+	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "S16", "#336"),
 	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "S17", "#aaa"),
 	new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.json", "Biblo", "#aaa"),
 	new gameCollection("Studentenwerk", "Studentenwerk", "gameData.json", "StuWe", "#aaa"),
-	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#fbb"),
+	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#633"),
 ];
 
 var loadedCollections = [];
@@ -100,11 +100,11 @@ function fillTable() {
     var game = loadedGames[i];
     rowHTML += "<tr>";
     rowHTML += "<td>" + game.name + "</td>";
-    rowHTML += "<td>" + game.rating + "</td>";
-    rowHTML += "<td>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
-    rowHTML += "<td>" + game.minAge + "+</td>";
-    rowHTML += "<td>" + game.weight + "</td>";
-    rowHTML += "<td>" + game.yearPublished + "</td>";
+    rowHTML += "<td class='smallerFont'>" + game.rating + "</td>";
+    rowHTML += "<td class='smallerFont'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
+    rowHTML += "<td class='smallerFont'>" + game.minAge + "+</td>";
+    rowHTML += "<td class='smallerFont'>" + game.weight + "</td>";
+    rowHTML += "<td class='smallerFont'>" + game.yearPublished + "</td>";
     rowHTML += "<td class='sourceCol'>";
     for (var j = 0; j < game.loadedColls.length; j++) {
       collection = loadedCollections[game.loadedColls[j]];
