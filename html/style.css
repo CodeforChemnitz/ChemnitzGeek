@@ -92,7 +92,7 @@
   content: none;
 }
 
-#soft {
+#sliderWeight, #sliderRating {
   display: inline-block;
   width: 100px;
   margin: 0px 5px;
