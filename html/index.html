@@ -43,7 +43,7 @@
         <script>
           collectionBoxes = "";
           for (i = 0; i < collections.length; i++) {
-            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\"" + ((i==4 || i==0) ? " checked" : "") + "/> " + collections[i].name + "<br/>";
+            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\"" + ((i==4 || i==3 || i==0) ? " checked" : "") + "/> " + collections[i].name + "<br/>";
           }
           document.getElementById("collectionsForm").innerHTML = collectionBoxes;
         </script>
