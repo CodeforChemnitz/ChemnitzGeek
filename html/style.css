@@ -6,6 +6,7 @@
 #gameTableHead tr{
   border-bottom: 2px solid black;
   box-shadow: 0px 2px 3px grey;
+  text-align: left;
 }
 #gameTableBody tr{
   border-bottom: 1px solid black;
@@ -27,12 +28,12 @@
 }
 
 #gameTable tbody tr:nth-child(even) {
-  background-color: #f6f6f6;
+  background-color: #eee;
 }
 
 #gameTable tbody tr:hover {
   color: #000;
-  background-color: #eef;
+  background-color: #cce;
 }
 
 #side {
@@ -40,7 +41,7 @@
   float: left;
   margin: 0px 15px;
   padding: 10px;
-  background-color: #555;
+  background-color: #333;
   color: #eee;
 } 
 
@@ -51,10 +52,12 @@
 
 #side input[type=text] {
   width: 25pt;
+  height: 15px;
 }
 
 #side input[type=number] {
   width: 30pt;
+  height: 15px;
 }
 
 #inputSubmit {
@@ -68,6 +71,7 @@
 
 #searchForm {
   border-bottom: 1px solid #eee;
+  line-height: 20px;
 }
 
 #searchForm input {

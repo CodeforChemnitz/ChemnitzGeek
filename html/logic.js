@@ -27,9 +27,11 @@ function matchesQuery(game) {
 	var ratingMax = parseFloat(document.forms["searchForm"]["inputRatingMax"].value);
 	var weightMin = parseFloat(document.forms["searchForm"]["inputWeightMin"].value);
 	var weightMax = parseFloat(document.forms["searchForm"]["inputWeightMax"].value);
+  var age       = parseInt(document.forms["searchForm"]["inputAge"].value);
 	if (numPlayers > 0 && (numPlayers < parseInt(game.minPlayers) || numPlayers > parseInt(game.maxPlayers)))  return false;
 	if (parseFloat(game.rating) < ratingMin || parseFloat(game.rating) > ratingMax)  return false;
 	if (parseFloat(game.weight) < weightMin || parseFloat(game.weight) > weightMax)  return false;
+  if (parseInt(game.minAge) > age)  return false;
 	return true;
 }
 
@@ -106,6 +108,11 @@ function fillTable() {
     rowHTML += "<td class='smallerFont'>" + game.weight + "</td>";
     rowHTML += "<td class='smallerFont'>" + game.yearPublished + "</td>";
     rowHTML += "<td class='sourceCol'>";
+    rowHTML += "<span class='collsname' style='background-color: #333;'>"
+      + "<a href='https://boardgamegeek.com/boardgame/" + game.bggID + "' target='_blank'>"
+      + "BGG"
+      + "</a>"
+      + "</span>";
     for (var j = 0; j < game.loadedColls.length; j++) {
       collection = loadedCollections[game.loadedColls[j]];
       rowHTML += "<span class='collsname' style='background-color: " + collection.color + ";'>"
