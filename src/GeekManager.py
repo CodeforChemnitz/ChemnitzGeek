@@ -22,10 +22,32 @@ class GeekManager:
     def LoadIDsFromNames(self):
         for i in range(len(self.idList), len(self.nameList)):
             gameName = self.nameList[i]
-            (gameId, bggGameName) = self.LoadBGGIDFromName(gameName)
+            (gameId, bggGameName) = self.LoadBGGIDFromNameExact(gameName)
+            if gameId == "-1":
+                (gameId, bggGameName) = self.LoadBGGIDFromName(gameName)
             self.bggNameList.append(bggGameName)
             self.idList.append(gameId)
         print("Now " + str(len(self.nameList)) + " names and " + str(len(self.idList)) + " ids are loaded")
+
+    def LoadBGGIDFromNameExact(self, name):
+        # credit to http://stackoverflow.com/questions/4451600/python-newbie-parse-xml-from-api-call
+        url = "https://boardgamegeek.com/xmlapi2/search?query=" + urllib.parse.quote(name) + "&exact=1"
+        response = urllib.request.urlopen(url)
+        gameId = "-1"
+        gameName = "UNKNOWN"
+        try:
+            root = ET.parse(response).getroot()
+            item = root.find('item')
+            gameId = item.attrib['id']
+            gameName = item.find('name').attrib['value']
+            #print item.find('name').text + " [" + str(item['id']) + "]"
+        except:
+            print("Error:" + str(sys.exc_info()[0]))
+        print("... IN  " + name)
+        print("... RES " + gameName)
+        print("... ID  " + gameId)
+        print("\n")
+        return gameId, gameName
             
     def LoadBGGIDFromName(self, name):
         # credit to http://stackoverflow.com/questions/4451600/python-newbie-parse-xml-from-api-call
