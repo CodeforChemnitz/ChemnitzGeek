@@ -1,5 +1,5 @@
 #gameTable {
-	width: 80%;
+	width: 70%;
   border-collapse: collapse;
 }
 
@@ -52,13 +52,20 @@
 }
 
 #side input[type=text] {
-  width: 25pt;
   height: 15px;
 }
 
 #side input[type=number] {
   width: 30pt;
   height: 15px;
+}
+
+#inputYearMin, #inputYearMax {
+  width: 25pt;
+}
+
+#inputSearchWords {
+  width: 90%;
 }
 
 #inputSubmit {

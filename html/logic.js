@@ -21,13 +21,16 @@ var loadedCollections = [];
 var loadedGames = [];
 
 function matchesQuery(game) {
+	var searchWords = document.forms["searchForm"]["inputSearchWords"].value.trim().split(/\s+/);
 	var numPlayers = parseInt(document.forms["searchForm"]["inputNumPlayers"].value);
-
 	var ratingMin = parseFloat(document.forms["searchForm"]["inputRatingMin"].value);
 	var ratingMax = parseFloat(document.forms["searchForm"]["inputRatingMax"].value);
 	var weightMin = parseFloat(document.forms["searchForm"]["inputWeightMin"].value);
 	var weightMax = parseFloat(document.forms["searchForm"]["inputWeightMax"].value);
   var age       = parseInt(document.forms["searchForm"]["inputAge"].value);
+  for (var i = 0; i < searchWords.length; i++)
+    if (!game.name.toLowerCase().includes(searchWords[i].toLowerCase()))
+      return false;
 	if (numPlayers > 0 && (numPlayers < parseInt(game.minPlayers) || numPlayers > parseInt(game.maxPlayers)))  return false;
 	if (parseFloat(game.rating) < ratingMin || parseFloat(game.rating) > ratingMax)  return false;
 	if (parseFloat(game.weight) < weightMin || parseFloat(game.weight) > weightMax)  return false;
