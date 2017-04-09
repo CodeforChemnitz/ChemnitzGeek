@@ -109,6 +109,12 @@ class GeekManager:
             self.nameList.append(name)
         print(str(len(self.nameList)) + " names in list")
 
+    def ReadNamesFromBibliothekCSVFile(self, fPath):
+        csvFile = open(fPath, 'r')
+        csvReader = csv.DictReader(csvFile, delimiter=',', quotechar='\"')
+        for row in csvReader:
+            self.nameList.append(row['name'])
+
     def ReadIDsFromRawFile(self, fPath):
         fIn = open(fPath, 'r')
         for line in fIn:
