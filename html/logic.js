@@ -44,24 +44,17 @@ function loadSingleCollectionGames(collection) {
     return response.json();
   })
   .then( (json) => {
-    return ...
-    if (collection.games == null)  //TODO: move this to more appropriate place
-      collection.games = jQuery.extend(true, {}, json);
+    return new Promise( function(resolve, reject) {
+      if (collection.games == null)  //TODO: move this to more appropriate place
+        collection.games = jQuery.extend(true, {}, json);
       loadedCollections.push(collection);
-    });
-  //.then(function(){
-  //});
+      resolve("Success");
+    })
+  });
 }
 function reloadGames() {
-  //loadedCollections = [];
-	//var collectionIndices = [];
-	//for (i = 0; i < collections.length; i++) {
-		//if (document.getElementById("check"+collections[i].camelName).checked) {
-			//collectionIndices.push(i);
-		//}
-	//}
-  //loadSingleCollectionGames(collectionIndices);
   let checkedColls = []
+
   for (i = 0; i < collections.length; i++) {
     if (document.getElementById("check"+collections[i].camelName).checked) {
       checkedColls.push(collections[i]);
@@ -69,13 +62,18 @@ function reloadGames() {
   }
   promises = checkedColls.map(loadSingleCollectionGames);
   Promise.all(promises)
-    .then( () => {
-      console.log("All promises succeeded");
-      reloadGamesFinished();
+  .then( () => {
+    console.log("All promises succeeded");
+    return new Promise( function(resolve, reject) {
+      mergeCollections();
+      resolve("Success");
+    }).then( () => {
+      fillTable();
     });
+  });
 }
 
-function reloadGamesFinished() {
+function mergeCollections() {
   loadedGames = []
 
   for (i = 0; i < loadedCollections.length; i++) {
@@ -89,7 +87,6 @@ function reloadGamesFinished() {
   }
 
   console.log(loadedGames.length + " unique games loaded");
-  fillTable();
 }
 
 function addGameToLoadedGames(game, loadedCollIdx) {
