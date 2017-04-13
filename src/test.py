@@ -2,11 +2,12 @@ from GeekManager import *
 
 gm = GeekManager()
 
-gm.ReadNamesFromRawFile("../data/swcz.names")
+# gm.ReadNamesFromBibliothekCSVFile("../data/bibliothek.exported.csv")
+# gm.ReadNamesFromRawFile("../data/swcz.names")
 # gm.ReadNamesIDsCSVFile("../data/swcz.namesids.csv")
-gm.LoadIDsFromNames()
-#gm.ReadNamesIDsCSVFile("../data/namesids_spielenacht2016.csv")
-# gm.RequestDetailsBatch(100)
+# gm.LoadIDsFromNames()
+gm.ReadNamesIDsCSVFile("../data/bibliothek.namesids.csv")
+gm.RequestDetailsBatch(100)
 # gm.PrintGames()
-# gm.WriteCSVFile("../data/out.csv")
-# gm.WriteJSONFile("../html/swcz.json")
+# gm.WriteNamesIDsCSVFile("../data/bibliothek.namesids.csv")
+gm.WriteJSONFile("../html/bibliothek.json")

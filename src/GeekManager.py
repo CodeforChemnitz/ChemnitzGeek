@@ -1,6 +1,7 @@
 # from Game import *
 import csv
 import sys
+import time
 import urllib.request
 from xml.etree import ElementTree as ET
 
@@ -72,16 +73,25 @@ class GeekManager:
     def RequestDetailsBatch(self, batchSize):
         for b in self.Batch(self.idList, batchSize):
             ids = ",".join([x for x in b if int(x) >= 0])
-            self.LoadBGGData(ids)
+            attempts = 1
+            success = False
+            while attempts < 4 and not success:
+                try:
+                    self.LoadBGGData(ids)
+                    success = True
+                except:
+                    print("Attempt #" + str(attempts) + " failed")
+                    attempts += 1
+                    time.sleep(5)
 
     def LoadBGGData(self, ids):
         ratings = []
-        try:
-            url = "https://boardgamegeek.com/xmlapi2/thing?stats=1&id=" + ids
-            print(url)
-            response = urllib.request.urlopen(url)
-            root = ET.parse(response).getroot()
-            for item in root.findall('item'):
+        url = "https://boardgamegeek.com/xmlapi2/thing?stats=1&id=" + ids
+        print("\n\n" + url)
+        response = urllib.request.urlopen(url)
+        root = ET.parse(response).getroot()
+        for item in root.findall('item'):
+            try:
                 game = {}
                 game['bggID'] = item.attrib["id"]
                 game['name'] = item.find("name[@type='primary']").attrib['value']
@@ -92,8 +102,8 @@ class GeekManager:
                 game['rating'] = item.find('statistics').find('ratings').find('average').attrib['value']
                 game['weight'] = item.find('statistics').find('ratings').find('averageweight').attrib['value']
                 self.gameList.append(game)
-        except:
-            print("Error: " + str(sys.exc_info()[0]))
+            except:
+                print("WARNING: GAME SKIPPED")
  
         # if not len(ratings) == len(ids):
             # print(str(len(ratings)) +"ratings but" +str(len(ids)) + "ids")
@@ -113,7 +123,7 @@ class GeekManager:
         csvFile = open(fPath, 'r')
         csvReader = csv.DictReader(csvFile, delimiter=',', quotechar='\"')
         for row in csvReader:
-            self.nameList.append(row['name'])
+            self.nameList.append(row['Titel (200.1)'])
 
     def ReadIDsFromRawFile(self, fPath):
         fIn = open(fPath, 'r')
