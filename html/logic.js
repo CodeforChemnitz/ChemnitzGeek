@@ -40,7 +40,7 @@ function matchesQuery(game) {
 
 function loadSingleCollectionGames(collectionIndices) {
   var currIdx = collectionIndices[0];
-  $.getJSON(collections[currIdx].url, function(json) {
+  fetch(collections[currIdx].url).then( (response) => {
     if (collections[currIdx].games == null)  //TODO: move this to more appropriate place
       collections[currIdx].games = jQuery.extend(true, {}, json);
   }).then(function(){
