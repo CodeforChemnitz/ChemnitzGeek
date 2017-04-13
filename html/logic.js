@@ -38,31 +38,41 @@ function matchesQuery(game) {
 	return true;
 }
 
-function loadSingleCollectionGames(collectionIndices) {
-  var currIdx = collectionIndices[0];
-  fetch(collections[currIdx].url).then( (response) => {
-    if (collections[currIdx].games == null)  //TODO: move this to more appropriate place
-      collections[currIdx].games = jQuery.extend(true, {}, json);
-  }).then(function(){
-    loadedCollections.push(collections[currIdx]);
-    collectionIndices.splice(0, 1);
-    if (collectionIndices.length > 0) {
-      loadSingleCollectionGames(collectionIndices);
-    }
-    else {
-      reloadGamesFinished();
-    }
-  });
+function loadSingleCollectionGames(collection) {
+  //var currIdx = collectionIndices[0];
+  return fetch(collection.url).then( (response) => {
+    return response.json();
+  })
+  .then( (json) => {
+    return ...
+    if (collection.games == null)  //TODO: move this to more appropriate place
+      collection.games = jQuery.extend(true, {}, json);
+      loadedCollections.push(collection);
+    });
+  //.then(function(){
+  //});
 }
 function reloadGames() {
-  loadedCollections = [];
-	var collectionIndices = [];
-	for (i = 0; i < collections.length; i++) {
-		if (document.getElementById("check"+collections[i].camelName).checked) {
-			collectionIndices.push(i);
-		}
-	}
-  loadSingleCollectionGames(collectionIndices);
+  //loadedCollections = [];
+	//var collectionIndices = [];
+	//for (i = 0; i < collections.length; i++) {
+		//if (document.getElementById("check"+collections[i].camelName).checked) {
+			//collectionIndices.push(i);
+		//}
+	//}
+  //loadSingleCollectionGames(collectionIndices);
+  let checkedColls = []
+  for (i = 0; i < collections.length; i++) {
+    if (document.getElementById("check"+collections[i].camelName).checked) {
+      checkedColls.push(collections[i]);
+    }
+  }
+  promises = checkedColls.map(loadSingleCollectionGames);
+  Promise.all(promises)
+    .then( () => {
+      console.log("All promises succeeded");
+      reloadGamesFinished();
+    });
 }
 
 function reloadGamesFinished() {
