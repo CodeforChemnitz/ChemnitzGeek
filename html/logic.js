@@ -39,6 +39,7 @@ function matchesQuery(game) {
 }
 
 function loadSingleCollectionGames(collection) {
+  console.log("Load collection " + collection.name);
   //var currIdx = collectionIndices[0];
   return fetch(collection.url).then( (response) => {
     return response.json();
@@ -46,12 +47,13 @@ function loadSingleCollectionGames(collection) {
   .then( (json) => {
     return new Promise( function(resolve, reject) {
       if (collection.games == null)  //TODO: move this to more appropriate place
-        collection.games = jQuery.extend(true, {}, json);
+        collection.games = jQuery.extend(true, {}, json); //Object.assign(target, json)
       loadedCollections.push(collection);
-      resolve("Success");
+      resolve("Success"); //TODO: return collection instead of using global var
     })
   });
 }
+
 function reloadGames() {
   let checkedColls = []
 
@@ -62,8 +64,9 @@ function reloadGames() {
   }
   promises = checkedColls.map(loadSingleCollectionGames);
   Promise.all(promises)
-  .then( () => {
+  .then( (val) => {
     console.log("All promises succeeded");
+    console.log(val);
     return new Promise( function(resolve, reject) {
       mergeCollections();
       resolve("Success");
