@@ -1,24 +1,21 @@
 class gameCollection {
-	constructor(name, camelName, url, shortName, color) {
-		this.name = name;
-		this.camelName = camelName;
-		this.url = url;
-		this.games = null;
-		this.shortName = shortName;
+  constructor(name, camelName, url, shortName, color) {
+    this.name = name;
+    this.camelName = camelName;
+    this.url = url;
+    this.games = null;
+    this.shortName = shortName;
     this.color = color;
-	}
+  }
 }
 
 var collections = [
-	new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "SN16", "#336"),
-	new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "SN17", "#aaa"),
-	new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.bibliothek.json", "Bibl", "#aaa"),
-	new gameCollection("Studentenwerk", "Studentenwerk", "gameData.swcz.json", "StWe", "#363"),
-	new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#633"),
+  new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "SN16", "#336"),
+  new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "SN17", "#aaa"),
+  new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.bibliothek.json", "Bibl", "#aaa"),
+  new gameCollection("Studentenwerk", "Studentenwerk", "gameData.swcz.json", "StWe", "#363"),
+  new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#633"),
 ];
-
-var loadedCollections = [];
-var loadedGames = [];
 
 function matchesQuery(game) {
 	var searchWords = document.forms["searchForm"]["inputSearchWords"].value.trim().split(/\s+/);
@@ -48,8 +45,8 @@ function loadSingleCollectionGames(collection) {
     return new Promise( function(resolve, reject) {
       if (collection.games == null)  //TODO: move this to more appropriate place
         collection.games = jQuery.extend(true, {}, json); //Object.assign(target, json)
-      loadedCollections.push(collection);
-      resolve("Success"); //TODO: return collection instead of using global var
+      //loadedCollections.push(collection);
+      resolve(collection);
     })
   });
 }
@@ -64,35 +61,36 @@ function reloadGames() {
   }
   promises = checkedColls.map(loadSingleCollectionGames);
   Promise.all(promises)
-  .then( (val) => {
+  .then( (loadedCollections) => {
     console.log("All promises succeeded");
-    console.log(val);
     return new Promise( function(resolve, reject) {
-      mergeCollections();
-      resolve("Success");
+      games = mergeCollections(loadedCollections);
+      resolve(games, loadedCollections);
     }).then( () => {
-      fillTable();
+      console.log("Fill table");
+      fillTable(games, loadedCollections);
     });
   });
 }
 
-function mergeCollections() {
-  loadedGames = []
+function mergeCollections(loadedCollections) {
+  let loadedGames = []
 
   for (i = 0; i < loadedCollections.length; i++) {
     var games = loadedCollections[i].games;
     for (var j = 0; j < Object.keys(games).length; j++) {
       var game = games[j];
       if (!matchesQuery(game))  continue;
-      
-      addGameToLoadedGames(game, i);
+
+      addGameToLoadedGames(game, loadedGames, i);
     }
   }
 
   console.log(loadedGames.length + " unique games loaded");
+  return loadedGames;
 }
 
-function addGameToLoadedGames(game, loadedCollIdx) {
+function addGameToLoadedGames(game, loadedGames, loadedCollIdx) {
   var id = game.bggID;
   var idExists = false;
   for (var i = 0; i < loadedGames.length; i++) {
@@ -108,7 +106,7 @@ function addGameToLoadedGames(game, loadedCollIdx) {
   }
 }
 
-function fillTable() {
+function fillTable(loadedGames, loadedCollections) {
   document.getElementById("gameTableBody").innerHTML = "";
   for (var i = 0; i < loadedGames.length; i++) {
     var rowHTML = "";
