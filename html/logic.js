@@ -107,33 +107,32 @@ function addGameToLoadedGames(game, loadedGames, loadedCollIdx) {
 }
 
 function fillTable(loadedGames, loadedCollections) {
-  document.getElementById("gameTableBody").innerHTML = "";
+  var tableHTML = "";
   for (var i = 0; i < loadedGames.length; i++) {
-    var rowHTML = "";
     var game = loadedGames[i];
-    rowHTML += "<tr>";
-    rowHTML += "<td>" + game.name + "</td>";
-    rowHTML += "<td class='smallerFont'>" + game.rating + "</td>";
-    rowHTML += "<td class='smallerFont'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
-    rowHTML += "<td class='smallerFont'>" + game.minAge + "+</td>";
-    rowHTML += "<td class='smallerFont'>" + game.weight + "</td>";
-    rowHTML += "<td class='smallerFont'>" + game.yearPublished + "</td>";
-    rowHTML += "<td class='sourceCol'>";
-    rowHTML += "<span class='collsname' style='background-color: #333;'>"
+    tableHTML += "<tr>";
+    tableHTML += "<td>" + game.name + "</td>";
+    tableHTML += "<td class='smallerFont'>" + game.rating + "</td>";
+    tableHTML += "<td class='smallerFont'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
+    tableHTML += "<td class='smallerFont'>" + game.minAge + "+</td>";
+    tableHTML += "<td class='smallerFont'>" + game.weight + "</td>";
+    tableHTML += "<td class='smallerFont'>" + game.yearPublished + "</td>";
+    tableHTML += "<td class='sourceCol'>";
+    tableHTML += "<span class='collsname' style='background-color: #333;'>"
       + "<a href='https://boardgamegeek.com/boardgame/" + game.bggID + "' target='_blank'>"
       + "BGG"
       + "</a>"
       + "</span>";
     for (var j = 0; j < game.loadedColls.length; j++) {
       collection = loadedCollections[game.loadedColls[j]];
-      rowHTML += "<span class='collsname' style='background-color: " + collection.color + ";'>"
+      tableHTML += "<span class='collsname' style='background-color: " + collection.color + ";'>"
         + "<a href='#'>"
         + collection.shortName
         + "</a>"
         + "</span>";
     }
-    rowHTML += "</td>";
-    rowHTML += "</tr>";
-    document.getElementById("gameTableBody").innerHTML += rowHTML;
+    tableHTML += "</td>";
+    tableHTML += "</tr>";
   }
+  document.getElementById("gameTableBody").innerHTML = tableHTML;
 }
