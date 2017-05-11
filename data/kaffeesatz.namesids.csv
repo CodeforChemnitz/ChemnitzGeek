@@ -1,68 +1,65 @@
-name,bggName,id,
-Hungry Dog,Hungry Dog,5895,
-Blitz und Donner,Blitz und Donner,638,
-Burg Appenzell,Burg Appenzell,28089,
-Hütchen-Tennis,Hütchen-Tennis,16232,
-Risiko,Risiko,181,
-Mensch ärgere dich nicht,Flipper Mensch ärgere Dich nicht,2136,0
-Thurn und Taxis,Thurn und Taxis,21790,
-Waka Waka,Waka Waka,118025,
-Blue Moon City,Blue Moon City,21882,
-Beowulf: Der sagenhafte Drachenkämpfer,Beowulf: Der sagenhafte Drachenkämpfer,17449,
-Skip-Bo: Breakers,Skip-Bo Breakers,87861,
-Just 4 Fun,Just 4 Fun,17534,
-Ramba Samba,Ramba Samba,21986,
-"Schäfchenspiel: Schäfer, such deine Schäfchen",UNKNOWN,-1,0
-Der schwarze Pirat,Der schwarze Pirat,23890,
-Geister Wäldchen,UNKNOWN,-1,0
-Wissens-Spektrum,Wissens-Spektrum,18840,
-Trick Track Troll,Trick Track Troll,16703,
-Iglu Iglu,Iglu Iglu,9509,
-Trivial Pursuit: Familien Edition,Trivial Pursuit: Familien Edition,2001,
-Ubongo,Ubongo,16986,
-Das Magazin (Spiele-Sammlung?),UNKNOWN,-1,0
-Minister,Minister,1174,
-Torreta,Torreta,52647,
-Die Siedler von Catan,Die Siedler von Catan,13,
-Bärenrennen,UNKNOWN,-1,0
-Regenbogenland,Regenbogenland,71622,
-Presto Pippo,Presto Pippo!,21642,
-Hühner-Roulette,Hühner-Roulette,66050,
-???,UNKNOWN,-1,0
-Stille Post Extrem,Stille Post Extrem,46213,
-Paris Paris,Paris Paris,5825,
-Viva Topo!,Viva Topo!,8195,
-Die guten und die bösen Geister,Die guten und die bösen Geister,2290,
-Small Parquetry With Pattern Cards,UNKNOWN,-1,0
-Ausgerechnet Buxtehude,Ausgerechnet Buxtehude,20761,
-Skat,Skat,6819,
-Heimlich & Co,Heimlich & Co.,382,
-Klappbrett (Spielesammlung?),UNKNOWN,-1,0
-Auf die Plätze: Unser Chemnitz Spiel,UNKNOWN,-1,0
-???,UNKNOWN,-1,0
-Turi-Tour,Turi-Tour,65599,
-Die Wörter???,UNKNOWN,-1,0
-Was'n das?,Was'n das?,21022,
-Die Säulen von Venedig,Die Säulen von Venedig,25114,
-Ken Follett: Die Säulen der Erde,UNKNOWN,-1,0
-Halli Galli: Junior,Halli Galli Junior,20832,
-Industria,Industria,8124,
-Hellas,Hellas,4529,
-Die Siedler von Catan: Kämpfer & Kaufleute,Die Siedler von Catan: Kartenspiel – Kämpfer & Kaufleute,155354,
-Die Siedler von Catan: Kartenspiel (?),Die Siedler von Catan: Das Kartenspiel,278,
-Die Siedler von Catan: Seefahrer,Die Siedler von Catan: Seefahrer Erweiterung,325,
-Schach,3er Schach,22367,0
-Euphrat & Tigris,Euphrat & Tigris: Die Zikkurat,43490,0
-Roulette,Roulette,15549,
-Tick... Tack... Bumm: Party Edition,Tick... Tack... Bumm: Party Edition,63052,
-Die kleine Raupe Nimmersatt: Das Spiel,Die kleine Raupe Nimmersatt (Das Spiel),29653,
-Doktor Schlüsselbart,Doktor Schlüsselbart,21987,
-Monopoly,Monopoly,1406,
-Elfenland,Elfenland,10,
-Europa Reise,Euro: Auf der Reise durch Europa mit der neuen Einheitswährung,95389,0
-Piranha Pedro,Piranha Pedro,14035,
-Dschunke,Dschunke,3234,
-Olympia 2000,Olympia 2000 (v. Chr.),261,
-Spongebob (?) Memory,UNKNOWN,-1,0
-Hart an der Grenze,Hart an der Grenze,22237,
-Die drei ???: Das Geheimnis der Geistervilla(?),UNKNOWN,-1,0
+"name","bggName","id"
+"Hungry Dog","Hungry Dog","5895"
+"Blitz und Donner","Blitz und Donner","638"
+"Burg Appenzell","Burg Appenzell","28089"
+"Hütchen-Tennis","Hütchen-Tennis","16232"
+"Risiko","Risiko","181"
+"Mensch ärgere dich nicht","Flipper Mensch ärgere Dich nicht","2136"
+"Thurn und Taxis","Thurn und Taxis","21790"
+"Waka Waka","Waka Waka","118025"
+"Blue Moon City","Blue Moon City","21882"
+"Beowulf: Der sagenhafte Drachenkämpfer","Beowulf: Der sagenhafte Drachenkämpfer","17449"
+"Skip-Bo: Breakers","Skip-Bo Breakers","87861"
+"Just 4 Fun","Just 4 Fun","17534"
+"Ramba Samba","Ramba Samba","21986"
+"Schäfchenspiel: Schäfer, such deine Schäfchen","Schäfchenspiel: Schäfer, such deine Schäfchen","66049"
+"Der schwarze Pirat","Der schwarze Pirat","23890"
+"Geisterwäldchen","Geisterwäldchen","16142"
+"Wissens-Spektrum","Wissens-Spektrum","18840"
+"Trick Track Troll","Trick Track Troll","16703"
+"Iglu Iglu","Iglu Iglu","9509"
+"Trivial Pursuit: Familien Edition","Trivial Pursuit: Familien Edition","2001"
+"Ubongo","Ubongo","16986"
+"Minister","Minister","1174"
+"Torreta","Torreta","52647"
+"Die Siedler von Catan","Die Siedler von Catan","13"
+"Bärenrennen","UNKNOWN","-1"
+"Regenbogenland","Regenbogenland","71622"
+"Presto Pippo","Presto Pippo!","21642"
+"Hühner-Roulette","Hühner-Roulette","66050"
+"???","UNKNOWN","-1"
+"Stille Post Extrem","Stille Post Extrem","46213"
+"Paris Paris","Paris Paris","5825"
+"Viva Topo!","Viva Topo!","8195"
+"Die guten und die bösen Geister","Die guten und die bösen Geister","2290"
+"Ausgerechnet Buxtehude","Ausgerechnet Buxtehude","20761"
+"Skat","Skat","6819"
+"Heimlich & Co","Heimlich & Co.","382"
+"Auf die Plätze: Unser Chemnitz Spiel","UNKNOWN","-1"
+"???","UNKNOWN","-1"
+"Turi-Tour","Turi-Tour","65599"
+"Die Wörter???","UNKNOWN","-1"
+"Was'n das?","Was'n das?","21022"
+"Die Säulen von Venedig","Die Säulen von Venedig","25114"
+"Die Säulen der Erde","Die Säulen der Erde","24480"
+"Halli Galli: Junior","Halli Galli Junior","20832"
+"Industria","Industria","8124"
+"Hellas","Hellas","4529"
+"Die Siedler von Catan: Kämpfer & Kaufleute","Die Siedler von Catan: Kartenspiel – Kämpfer & Kaufleute","155354"
+"Die Siedler von Catan: Kartenspiel (?)","Die Siedler von Catan: Das Kartenspiel","278"
+"Die Siedler von Catan: Seefahrer","Die Siedler von Catan: Seefahrer Erweiterung","325"
+"Schach","3er Schach","22367"
+"Euphrat & Tigris","Euphrat & Tigris: Die Zikkurat","43490"
+"Roulette","Roulette","15549"
+"Tick... Tack... Bumm: Party Edition","Tick... Tack... Bumm: Party Edition","63052"
+"Die kleine Raupe Nimmersatt: Das Spiel","Die kleine Raupe Nimmersatt (Das Spiel)","29653"
+"Doktor Schlüsselbart","Doktor Schlüsselbart","21987"
+"Monopoly","Monopoly","1406"
+"Elfenland","Elfenland","10"
+"Europa Reise","Euro: Auf der Reise durch Europa mit der neuen Einheitswährung","95389"
+"Piranha Pedro","Piranha Pedro","14035"
+"Dschunke","Dschunke","3234"
+"Olympia 2000","Olympia 2000 (v. Chr.)","261"
+"Spongebob (?) Memory","UNKNOWN","-1"
+"Hart an der Grenze","Hart an der Grenze","22237"
+"Die drei ???: Das Geheimnis der Geistervilla(?)","UNKNOWN","-1"
