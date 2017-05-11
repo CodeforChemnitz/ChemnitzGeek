@@ -2,7 +2,7 @@ from GeekManager import *
 
 gm = GeekManager()
 
-dataset = "spielenach2016"
+dataset = "spielenacht2016"
 
 # gm.ReadNamesFromBibliothekCSVFile("../data/bibliothek.exported.csv")
 # gm.ReadNamesIDsCSVFile("../data/swcz.namesids.csv")
