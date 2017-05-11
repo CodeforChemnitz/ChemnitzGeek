@@ -16,6 +16,15 @@ class GeekManager:
         name = name.strip()
         name = name.replace("\"", "")
         return name
+    
+    def GetLocalNameById (self, gameID):
+        for i in range(len(self.idList)):
+            if self.idList[i] == gameID:
+                try:
+                    return self.nameList[i]
+                except:
+                    return "Invalid"
+        return "Invalid"
 
     # BORDGAMEGEEK
     # ------------
@@ -101,9 +110,11 @@ class GeekManager:
                 game['maxPlayers'] = item.find('maxplayers').attrib['value']
                 game['rating'] = item.find('statistics').find('ratings').find('average').attrib['value']
                 game['weight'] = item.find('statistics').find('ratings').find('averageweight').attrib['value']
+                game['localName'] = self.GetLocalNameById(game['bggID'])
                 self.gameList.append(game)
-            except:
+            except Exception as e:
                 print("WARNING: GAME SKIPPED")
+                print(str(e))
  
         # if not len(ratings) == len(ids):
             # print(str(len(ratings)) +"ratings but" +str(len(ids)) + "ids")
@@ -154,7 +165,7 @@ class GeekManager:
             fOut.write("\"{}\",\"{}\",\"{}\"\n".format(self.nameList[i], self.bggNameList[i], self.idList[i]))
 
     def WriteJSONFile(self, fPath):
-        fields = ["bggID", "name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight"]
+        fields = ["bggID", "name", "yearPublished", "minAge", "minPlayers", "maxPlayers", "rating", "weight", "localName"]
         fOut = open(fPath, 'w')
         fOut.write("[\n{")
         fOut.write("},\n{".join([", ".join(["\""+field+"\": \"" + str(game[field]) + "\"" for field in fields]) for game in self.gameList]))

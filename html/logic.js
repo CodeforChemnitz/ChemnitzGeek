@@ -111,7 +111,7 @@ function fillTable(loadedGames, loadedCollections) {
   for (var i = 0; i < loadedGames.length; i++) {
     var game = loadedGames[i];
     tableHTML += "<tr>";
-    tableHTML += "<td>" + game.name + "</td>";
+    tableHTML += "<td>" + game.localName + "</td>";
     tableHTML += "<td class='smallerFont'>" + game.rating + "</td>";
     tableHTML += "<td class='smallerFont'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
     tableHTML += "<td class='smallerFont'>" + game.minAge + "+</td>";
