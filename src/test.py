@@ -2,7 +2,7 @@ from GeekManager import *
 
 gm = GeekManager()
 
-dataset = "swcz"
+dataset = "spielenach2016"
 
 # gm.ReadNamesFromBibliothekCSVFile("../data/bibliothek.exported.csv")
 # gm.ReadNamesIDsCSVFile("../data/swcz.namesids.csv")
@@ -16,6 +16,7 @@ dataset = "swcz"
 # gm.LoadIDsFromNames()
 # gm.WriteNamesIDsCSVFile("../data/" + dataset + ".namesids.csv")
 
-gm.ReadNamesIDsCSVFile("../data/" + dataset + ".namesids.csv")
+gm.ReadIDsFromRawFile("../data/" + dataset + ".ids")
+# gm.ReadNamesIDsCSVFile("../data/" + dataset + ".namesids.csv")
 gm.RequestDetailsBatch(100)
 gm.WriteJSONFile("../html/gameData." + dataset + ".json")

@@ -17,14 +17,14 @@ class GeekManager:
         name = name.replace("\"", "")
         return name
     
-    def GetLocalNameById (self, gameID):
+    def GetLocalNameById (self, gameID, fallback):
         for i in range(len(self.idList)):
             if self.idList[i] == gameID:
                 try:
                     return self.nameList[i]
                 except:
-                    return "Invalid"
-        return "Invalid"
+                    return fallback
+        return fallback
 
     # BORDGAMEGEEK
     # ------------
@@ -110,7 +110,7 @@ class GeekManager:
                 game['maxPlayers'] = item.find('maxplayers').attrib['value']
                 game['rating'] = item.find('statistics').find('ratings').find('average').attrib['value']
                 game['weight'] = item.find('statistics').find('ratings').find('averageweight').attrib['value']
-                game['localName'] = self.GetLocalNameById(game['bggID'])
+                game['localName'] = self.GetLocalNameById(game['bggID'], game['name'])
                 self.gameList.append(game)
             except Exception as e:
                 print("WARNING: GAME SKIPPED")
