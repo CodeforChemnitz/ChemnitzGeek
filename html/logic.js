@@ -94,8 +94,10 @@ function addGameToLoadedGames(game, loadedGames, loadedCollIdx) {
   var id = game.bggID;
   var idExists = false;
   for (var i = 0; i < loadedGames.length; i++) {
-    if (loadedGames[i].bggID == id && $.inArray(loadedCollIdx, loadedGames[i].loadedColls) == -1) {
-      loadedGames[i].loadedColls.push(loadedCollIdx);
+    if (loadedGames[i].bggID == id) {
+      if ($.inArray(loadedCollIdx, loadedGames[i].loadedColls) == -1) {
+        loadedGames[i].loadedColls.push(loadedCollIdx);
+      }
       idExists = true;
       break;
     }
