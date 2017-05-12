@@ -26,7 +26,7 @@ function matchesQuery(game) {
 	var weightMax = parseFloat(document.forms["searchForm"]["inputWeightMax"].value);
   var age       = parseInt(document.forms["searchForm"]["inputAge"].value);
   for (var i = 0; i < searchWords.length; i++)
-    if (!game.name.toLowerCase().includes(searchWords[i].toLowerCase()))
+    if (!game.name.toLowerCase().includes(searchWords[i].toLowerCase()) && !game.localName.toLowerCase().includes(searchWords[i].toLowerCase()))
       return false;
 	if (numPlayers > 0 && (numPlayers < parseInt(game.minPlayers) || numPlayers > parseInt(game.maxPlayers)))  return false;
 	if (parseFloat(game.rating) < ratingMin || parseFloat(game.rating) > ratingMax)  return false;
