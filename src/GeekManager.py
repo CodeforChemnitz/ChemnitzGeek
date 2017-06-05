@@ -37,6 +37,8 @@ class GeekManager:
                 (gameId, bggGameName) = self.LoadBGGIDFromName(gameName)
             self.bggNameList.append(bggGameName)
             self.idList.append(gameId)
+            time.sleep(3)
+
         print("Now " + str(len(self.nameList)) + " names and " + str(len(self.idList)) + " ids are loaded")
 
     def LoadBGGIDFromNameExact(self, name):

@@ -1,3 +1,6 @@
+var loadedGames = [];
+var checkedColls = [];
+
 class gameCollection {
   constructor(name, camelName, url, shortName, color) {
     this.name = name;
@@ -8,14 +11,74 @@ class gameCollection {
     this.color = color;
   }
 }
-
 var collections = [
   new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "SN16", "#336"),
   //new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "SN17", "#aaa"),
   new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.bibliothek.json", "Bibl", "#aaa"),
   new gameCollection("Studentenwerk", "Studentenwerk", "gameData.swcz.json", "StWe", "#363"),
+  new gameCollection("Würfeltürmer", "WuerfelTuermer", "gameData.tuermer.json", "WüTü", "#663"),
   new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#633"),
 ];
+
+class tableCol {
+  constructor(title, keyName) {
+    this.title = title;
+    this.keyName = keyName;
+  }
+}
+var tableCols = [
+  new tableCol("Name", "localName"),
+  new tableCol("Rating", "rating"),
+  new tableCol("Players", "minPlayers"),
+  new tableCol("Age", "minAge"),
+  new tableCol("Weight", "weight"),
+  new tableCol("Year", "yearPublished"),
+  new tableCol("Source", "loadedColls")
+];
+var sortCol = tableCols[0].keyName;
+
+function fillTableHead() {
+  var content = "<tr>";
+  for (var i = 0; i < tableCols.length; i++) {
+    content += "<th><a href='#' onclick=\"sortTable('" + tableCols[i].keyName + "')\">";
+    if (tableCols[i].keyName == sortCol) {
+      content += "▲ ";
+    }
+    else if ("-" + tableCols[i].keyName == sortCol) {
+      content += "▼ ";
+    }
+    content += tableCols[i].title + "</a></th>";
+  }
+  content += "</tr>";
+  document.getElementById("gameTableHead").innerHTML = content;
+}
+
+// Source: https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
+function sortTable(column) {
+  if (column) {
+    if (column == sortCol) {
+      sortCol = "-" + column;
+    }
+    else {
+      sortCol = column;
+    }
+  }
+  loadedGames.sort(dynamicSort(sortCol));
+  fillTableHead();
+  fillTable();
+}
 
 function matchesQuery(game) {
 	var searchWords = document.forms["searchForm"]["inputSearchWords"].value.trim().split(/\s+/);
@@ -52,7 +115,7 @@ function loadSingleCollectionGames(collection) {
 }
 
 function reloadGames() {
-  let checkedColls = []
+  checkedColls = []
 
   for (i = 0; i < collections.length; i++) {
     if (document.getElementById("check"+collections[i].camelName).checked) {
@@ -68,13 +131,13 @@ function reloadGames() {
       resolve(games, loadedCollections);
     }).then( () => {
       console.log("Fill table");
-      fillTable(games, loadedCollections);
+      sortTable();
     });
   });
 }
 
 function mergeCollections(loadedCollections) {
-  let loadedGames = []
+  loadedGames = []
 
   for (i = 0; i < loadedCollections.length; i++) {
     var games = loadedCollections[i].games;
@@ -108,16 +171,20 @@ function addGameToLoadedGames(game, loadedGames, loadedCollIdx) {
   }
 }
 
-function fillTable(loadedGames, loadedCollections) {
+function fillTable(loadedCollections) {
   var tableHTML = "";
   for (var i = 0; i < loadedGames.length; i++) {
     var game = loadedGames[i];
     tableHTML += "<tr>";
     tableHTML += "<td>" + game.localName + "</td>";
-    tableHTML += "<td class='smallerFont'>" + game.rating + "</td>";
+    /*tableHTML += "<td class='smallerFont'>" + game.rating + "</td>";*/
+    var ratingPercent = game.rating / 10.0;
+    tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\"> <rect width=\"" + 70 * ratingPercent + "\" height=\"10\" style=\"fill:rgb(" + ((1-ratingPercent) * 255) + "," + (ratingPercent * 255) + ",100)\" /> <rect width=\"70\" height=\"10\" style=\"fill:rgb(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0)\" /> </svg></td>";
     tableHTML += "<td class='smallerFont'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
     tableHTML += "<td class='smallerFont'>" + game.minAge + "+</td>";
-    tableHTML += "<td class='smallerFont'>" + game.weight + "</td>";
+    /*tableHTML += "<td class='smallerFont'>" + game.weight + "</td>";*/
+    var weightPercent = game.weight / 5.0;
+    tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\"> <rect width=\"" + 70 * weightPercent + "\" height=\"10\" style=\"fill:rgb(" + ((1-weightPercent) * 230) + "," + ((1-weightPercent) * 230) + ",230)\" /> <rect width=\"70\" height=\"10\" style=\"fill:rgb(0,0,0,0);stroke-width:1;stroke:rgb(0,0,0)\" /> </svg></td>";
     tableHTML += "<td class='smallerFont'>" + game.yearPublished + "</td>";
     tableHTML += "<td class='sourceCol'>";
     tableHTML += "<span class='collsname' style='background-color: #333;'>"
@@ -126,7 +193,7 @@ function fillTable(loadedGames, loadedCollections) {
       + "</a>"
       + "</span>";
     for (var j = 0; j < game.loadedColls.length; j++) {
-      collection = loadedCollections[game.loadedColls[j]];
+      collection =checkedColls[game.loadedColls[j]];
       tableHTML += "<span class='collsname' style='background-color: " + collection.color + ";'>"
         + "<a href='#'>"
         + collection.shortName

@@ -49,7 +49,7 @@
         <script>
           collectionBoxes = "";
           for (i = 0; i < collections.length; i++) {
-            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\"" + ((i==1 || i==2 || i==3) ? " checked" : "") + "/> " + collections[i].name + "<br/>";
+            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\" checked/> " + collections[i].name + "<br/>";
           }
           document.getElementById("collectionsForm").innerHTML = collectionBoxes;
         </script>
@@ -58,15 +58,9 @@
     <div id="searchResults">
       <table id="gameTable">
         <thead id="gameTableHead">
-          <tr>
-            <th>Name</th>
-            <th>Rating</th>
-            <th>Players</th>
-            <th>Age</th>
-            <th>Weight</th>
-            <th>Year</th>
-            <th>Source</th>
-          </tr>
+          <script>
+            fillTableHead();
+          </script>
         </thead>
         <tbody id="gameTableBody"/>
       </table>
