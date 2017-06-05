@@ -14,7 +14,7 @@ class gameCollection {
 var collections = [
   new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "SN16", "#336"),
   //new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "SN17", "#aaa"),
-  new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.bibliothek.json", "Bibl", "#aaa"),
+  new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.bibliothek.json", "Bibl", "#366"),
   new gameCollection("Studentenwerk", "Studentenwerk", "gameData.swcz.json", "StWe", "#363"),
   new gameCollection("Würfeltürmer", "WuerfelTuermer", "gameData.tuermer.json", "WüTü", "#663"),
   new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#633"),
