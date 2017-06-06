@@ -49,7 +49,7 @@
         <script>
           collectionBoxes = "";
           for (i = 0; i < collections.length; i++) {
-            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\" checked/> " + collections[i].name + "<br/>";
+            collectionBoxes += "<input type=\"checkbox\" id=\"check" + collections[i].camelName + "\" name=\"" + collections[i].camelName + "\" value=\"" + collections[i].camelName + "\" checked/> " + collections[i].name + " <a href=\"" + collections[i].externalLink + "\" target=\"_blank\"><img src=\"img/Icon_External_Link.svg\"/></a><br/>";
           }
           document.getElementById("collectionsForm").innerHTML = collectionBoxes;
         </script>

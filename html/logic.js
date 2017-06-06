@@ -2,22 +2,23 @@ var loadedGames = [];
 var checkedColls = [];
 
 class gameCollection {
-  constructor(name, camelName, url, shortName, color) {
+  constructor(name, camelName, url, shortName, color, externalLink) {
     this.name = name;
     this.camelName = camelName;
     this.url = url;
     this.games = null;
     this.shortName = shortName;
     this.color = color;
+    this.externalLink = externalLink;
   }
 }
 var collections = [
-  new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "SN16", "#336"),
+  new gameCollection("Spielenacht 2016", "Spielenacht2016", "gameData.spielenacht2016.json", "SN16", "#336", "http://chemnitzer.spielenacht.de"),
   //new gameCollection("Spielenacht 2017", "Spielenacht2017", "gameData.json", "SN17", "#aaa"),
-  new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.bibliothek.json", "Bibl", "#366"),
-  new gameCollection("Studentenwerk", "Studentenwerk", "gameData.swcz.json", "StWe", "#363"),
-  new gameCollection("Würfeltürmer", "WuerfelTuermer", "gameData.tuermer.json", "WüTü", "#663"),
-  new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#633"),
+  new gameCollection("Stadtbibliothek", "Stadtbibliothek", "gameData.bibliothek.json", "Bibl", "#366", "http://stadtbibliothek-chemnitz.de"),
+  new gameCollection("Studentenwerk", "Studentenwerk", "gameData.swcz.json", "StWe", "#363", "https://www.swcz.de/de/kultur-freizeit/spieleverleih/"),
+  new gameCollection("Würfeltürmer", "WuerfelTuermer", "gameData.tuermer.json", "WüTü", "#663", "http://wuerfeltuermer.de"),
+  new gameCollection("Kaffeesatz", "Kaffeesatz", "gameData.kaffeesatz.json", "Kffz", "#633", "http://kaffeesatz-chemnitz.info"),
 ];
 
 class tableCol {
