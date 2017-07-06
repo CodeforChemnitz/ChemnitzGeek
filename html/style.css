@@ -32,7 +32,7 @@
 }
 
 #gameTable {
-	width: 70%;
+	width: 100%;
   border-collapse: collapse;
 }
 
@@ -69,9 +69,12 @@
   background-color: #cce;
 }
 
-#side {
+#side, #searchResults {
   display: inline-block;
   float: left;
+}
+
+#side {
   margin-bottom: 10px;
   padding: 10px;
   background-color: #333;
