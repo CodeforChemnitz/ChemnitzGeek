@@ -15,33 +15,40 @@
   <body>
     <div id="side" class="col-2">
       <form id="searchForm" class="sideForm" onsubmit="return reloadGames();">
-        <input type="text" id="inputSearchWords" name="searchWords" placeholder="optional search terms..." autofocus/>
-        <br/>
+        <div class="searchParameter">
+          <input type="text" id="inputSearchWords" name="searchWords" placeholder="optional search terms..." autofocus/>
+        </div>
 
-        # Players:
-        <input type="number" id="inputNumPlayers" name="numPlayers" value="0" min="0" max="99"/>
-        <br/>
+        <div class="searchParameter">
+          # Players:
+          <input type="number" id="inputNumPlayers" name="numPlayers" value="0" min="0" max="99"/>
+        </div>
         
-        Rating:
-        <input type="hidden" id="inputRatingMin" name="inputRatingMin" value="1"/>
-        <input type="hidden" id="inputRatingMax" name="inputRatingMax" value="5"/>
-        <div id="sliderRating"></div>
-        <br/>
+        <div class="searchParameter">
+          Rating:
+          <input type="hidden" id="inputRatingMin" name="inputRatingMin" value="1"/>
+          <input type="hidden" id="inputRatingMax" name="inputRatingMax" value="5"/>
+          <div id="sliderRating"></div>
+        </div>
 
-        Weight:
-        <input type="hidden" id="inputWeightMin" name="inputWeightMin" value="1"/>
-        <input type="hidden" id="inputWeightMax" name="inputWeightMax" value="5"/>
-        <div id="sliderWeight"></div>
-        <br/>
+        <div class="searchParameter">
+          Weight:
+          <input type="hidden" id="inputWeightMin" name="inputWeightMin" value="1"/>
+          <input type="hidden" id="inputWeightMax" name="inputWeightMax" value="5"/>
+          <div id="sliderWeight"></div>
+        </div>
         
-        Age:
-        <input type="number" id="inputAge" name="inputAge" value="99"/>
-        <br/>
+        <div class="searchParameter">
+          Age:
+          <input type="number" id="inputAge" name="inputAge" value="99"/>
+        </div>
 
+        <!--
         Year::
         <input type="text" id="inputYearMin" name="inputYearMin" value="0"/>
         <input type="text" id="inputYearMax" name="inputYearMax" value="3000"/>
         <br/>
+        -->
 
         <input type="submit" id="inputSubmit" value="Refresh"/>
       </form>
