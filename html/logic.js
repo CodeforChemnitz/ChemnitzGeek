@@ -135,6 +135,8 @@ function reloadGames() {
       sortTable();
     });
   });
+
+  return false;  // Lest submit reloads page
 }
 
 function mergeCollections(loadedCollections) {
@@ -180,12 +182,12 @@ function fillTable(loadedCollections) {
     tableHTML += "<td>" + game.localName + "</td>";
     /*tableHTML += "<td class='smallerFont'>" + game.rating + "</td>";*/
     var ratingPercent = game.rating / 10.0;
-    tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\"> <rect width=\"" + 70 * ratingPercent + "\" height=\"10\" style=\"fill:rgb(" + Math.round((1-ratingPercent) * 255) + "," + Math.round(ratingPercent * 255) + ",100)\" /> <rect width=\"70\" height=\"10\" style=\"fill:rgb(0,0,0);stroke-width:1;stroke:rgb(0,0,0);fill-opacity:0.0;\" /> </svg></td>";
+    tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\" style=\"border: 1px solid black;\"> <rect width=\"" + 70 * ratingPercent + "\" height=\"10\" style=\"fill:rgb(" + Math.round((1-ratingPercent) * 255) + "," + Math.round(ratingPercent * 255) + ",100)\" /> </svg></td>";
     tableHTML += "<td class='smallerFont'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
     tableHTML += "<td class='smallerFont'>" + game.minAge + "+</td>";
     /*tableHTML += "<td class='smallerFont'>" + game.weight + "</td>";*/
     var weightPercent = game.weight / 5.0;
-    tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\"> <rect width=\"" + 70 * weightPercent + "\" height=\"10\" style=\"fill:rgb(" + Math.round((1-weightPercent) * 230) + "," + Math.round((1-weightPercent) * 230) + ",230)\" /> <rect width=\"70\" height=\"10\" style=\"fill:rgb(0,0,0);stroke-width:1;stroke:rgb(0,0,0);fill-opacity:0.0;\" /> </svg></td>";
+    tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\" style=\"border: 1px solid black;\"> <rect width=\"" + 70 * weightPercent + "\" height=\"10\" style=\"fill:rgb(" + Math.round((1-weightPercent) * 230) + "," + Math.round((1-weightPercent) * 230) + "," + Math.round(25 + (1-weightPercent) * 230) + ")\" /> </svg></td>";
     tableHTML += "<td class='smallerFont'>" + game.yearPublished + "</td>";
     tableHTML += "<td class='sourceCol'>";
     tableHTML += "<span class='collsname' style='background-color: #333;'>"

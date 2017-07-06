@@ -14,7 +14,7 @@
   </head>
   <body>
     <div id="side" class="col-2">
-      <form id="searchForm" class="sideForm">
+      <form id="searchForm" class="sideForm" onsubmit="return reloadGames();">
         <input type="text" id="inputSearchWords" name="searchWords" placeholder="optional search terms..."/>
         <br/>
 
@@ -43,7 +43,7 @@
         <input type="text" id="inputYearMax" name="inputYearMax" value="3000"/>
         <br/>
 
-        <input type="button" id="inputSubmit" value="Refresh" onclick="reloadGames();"/>
+        <input type="submit" id="inputSubmit" value="Refresh"/>
       </form>
       <form id="collectionsForm" class="sideForm">
         <script>
