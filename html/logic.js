@@ -182,7 +182,7 @@ function fillTable(loadedCollections) {
     tableHTML += "<td><a href='https://boardgamegeek.com/boardgame/" + game.bggID + "' target='_blank'>" + game.localName + "</a></td>";
     var ratingPercent = game.rating / 10.0;
     tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\" style=\"border: 1px solid black;\"> <rect width=\"" + 70 * ratingPercent + "\" height=\"10\" style=\"fill:hsl(" + Math.round(ratingPercent * 120) + ", 70%, 50%);\" /> </svg></td>";
-    tableHTML += "<td class='smallerFont'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
+    tableHTML += "<td class='smallerFont' style='text-align: center;'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
     tableHTML += "<td class='smallerFont'>" + game.minAge + "+</td>";
     var weightPercent = game.weight / 5.0;
     tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\" style=\"border: 1px solid black;\"> <rect width=\"" + 70 * weightPercent + "\" height=\"10\" style=\"fill:rgb(" + Math.round((1-weightPercent) * 230) + "," + Math.round((1-weightPercent) * 230) + "," + Math.round(25 + (1-weightPercent) * 230) + ")\" /> </svg></td>";
