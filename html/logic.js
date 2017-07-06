@@ -182,7 +182,7 @@ function fillTable(loadedCollections) {
     tableHTML += "<td>" + game.localName + "</td>";
     /*tableHTML += "<td class='smallerFont'>" + game.rating + "</td>";*/
     var ratingPercent = game.rating / 10.0;
-    tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\" style=\"border: 1px solid black;\"> <rect width=\"" + 70 * ratingPercent + "\" height=\"10\" style=\"fill:rgb(" + Math.round((1-ratingPercent) * 255) + "," + Math.round(ratingPercent * 255) + ",100)\" /> </svg></td>";
+    tableHTML += "<td class='smallerFont'><svg width=\"70\" height=\"10\" style=\"border: 1px solid black;\"> <rect width=\"" + 70 * ratingPercent + "\" height=\"10\" style=\"fill:hsl(" + Math.round(ratingPercent * 120) + ", 70%, 50%);\" /> </svg></td>";
     tableHTML += "<td class='smallerFont'>" + game.minPlayers + " - " + game.maxPlayers + "</td>";
     tableHTML += "<td class='smallerFont'>" + game.minAge + "+</td>";
     /*tableHTML += "<td class='smallerFont'>" + game.weight + "</td>";*/
