@@ -147,6 +147,8 @@
 }
 
 .collsname {
+  color: #eee;
+  font-weight: bold;
   border: 1px solid black;
   border-radius: 3px;
   background-color: #bbe;
@@ -157,10 +159,9 @@
   font-family: monospace;
 }
 
-.collsname a {
-  color: #eee;
-  font-weight: bold;
+#gameTable a {
   text-decoration: none;
+  color: #333;
 }
 
 #gameTableHead a {
