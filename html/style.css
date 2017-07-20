@@ -48,9 +48,7 @@
 }
 
 #gameTable th {
-}
-
-#gameTable th {
+  white-space: nowrap;
   padding: 5px 9px;
 }
 
