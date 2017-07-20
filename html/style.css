@@ -106,6 +106,12 @@
 
 #inputSubmit {
   margin-top: 10px;
+  padding: 6px 15px;
+  border: 1px solid white;
+  color: white;
+  background-color: #333;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .sideForm {
