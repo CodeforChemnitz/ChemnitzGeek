@@ -21,26 +21,26 @@
           </div>
 
           <div class="searchParameter">
-            # Players:
+            <span lang="en"># Players:</span><span lang="de"># Spieler:</span>
             <input type="number" id="inputNumPlayers" name="numPlayers" value="0" min="0" max="99"/>
           </div>
           
           <div class="searchParameter">
-            Rating:
+            <span lang="en">Rating:</span><span lang="de">Wertung:</span>
             <input type="hidden" id="inputRatingMin" name="inputRatingMin" value="1"/>
             <input type="hidden" id="inputRatingMax" name="inputRatingMax" value="5"/>
             <div id="sliderRating"></div>
           </div>
 
           <div class="searchParameter">
-            Weight:
+            <span lang="en">Weight:</span><span lang="de">Komplexität:</span>
             <input type="hidden" id="inputWeightMin" name="inputWeightMin" value="1"/>
             <input type="hidden" id="inputWeightMax" name="inputWeightMax" value="5"/>
             <div id="sliderWeight"></div>
           </div>
           
           <div class="searchParameter">
-            Max. Age:
+            <span lang="en">Max. Age:</span><span lang="de">Max. Alter:</span>
             <input type="number" id="inputAge" name="inputAge" value="99"/>
           </div>
 
@@ -51,7 +51,8 @@
           <br/>
           -->
 
-          <input type="submit" id="inputSubmit" value="Refresh"/>
+          <input type="submit" id="inputSubmit" value="Refresh" lang="en"/>
+          <input type="submit" id="inputSubmit" value="Aktualisieren" lang="de"/>
         </form>
         <form id="collectionsForm" class="sideForm">
           <script>
@@ -62,6 +63,8 @@
             document.getElementById("collectionsForm").innerHTML = collectionBoxes;
           </script>
         </form>
+        <a  href="#" onclick="changeLanguage('de');" lang="en"><img class="localizationFlag" src="img/Flag_of_Germany.svg"/></a>
+        <a  href="#" onclick="changeLanguage('en');" lang="de"><img class="localizationFlag" src="img/Flag_of_the_United_States.svg"/></a>
       </div>
     </div>
     <div id="searchResults" class=col-9>

@@ -1,6 +1,26 @@
 var loadedGames = [];
 var checkedColls = [];
 
+var language = "de";
+
+$(document).ready( function() {
+  updateLocalization();
+});
+
+function changeLanguage(lang) {
+  language = lang;
+  updateLocalization();
+}
+
+function updateLocalization() {
+  $("[lang]").each(function () {
+    if ($(this).attr("lang") == language)
+      $(this).show();
+    else
+      $(this).hide();
+  });
+}
+
 class gameCollection {
   constructor(name, camelName, url, shortName, color, externalLink) {
     this.name = name;
@@ -28,13 +48,13 @@ class tableCol {
   }
 }
 var tableCols = [
-  new tableCol("Name", "localName"),
-  new tableCol("Rating", "rating"),
-  new tableCol("Players", "minPlayers"),
-  new tableCol("Age", "minAge"),
-  new tableCol("Weight", "weight"),
-  new tableCol("Year", "yearPublished"),
-  new tableCol("Source", "loadedColls")
+  new tableCol("<span lang='en'>Name</span><span lang='de'>Name</span>", "localName"),
+  new tableCol("<span lang='en'>Rating</span><span lang='de'>Wertung</span>", "rating"),
+  new tableCol("<span lang='en'>Players</span><span lang='de'>Spieler</span>", "minPlayers"),
+  new tableCol("<span lang='en'>Age</span><span lang='de'>Alter</span>", "minAge"),
+  new tableCol("<span lang='en'>Weight</span><span lang='de'>Komplex.</span>", "weight"),
+  new tableCol("<span lang='en'>Year</span><span lang='de'>Jahr</span>", "yearPublished"),
+  new tableCol("<span lang='en'>Source</span><span lang='de'>Quelle</span>", "loadedColls")
 ];
 var sortCol = tableCols[0].keyName;
 
@@ -52,6 +72,8 @@ function fillTableHead() {
   }
   content += "</tr>";
   document.getElementById("gameTableHead").innerHTML = content;
+
+  updateLocalization();
 }
 
 // Source: https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript
